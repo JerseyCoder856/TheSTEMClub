@@ -1,12 +1,11 @@
 /* main.js — STEM Club shared JS */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const paypalLink = 'PASTE_PAYPAL_URL_HERE';
+  const paypalClientId = 'AUD9a_F3Y3OsWLpPQzOzUOIOieSalL7NI5bWsHwqI76f3L5ZUWMBfNRHbl5-Wttn9aHZ_cSNmmk0Qddq';
   const paypalFallbackLink = 'https://www.paypal.com/donate';
 
   const buildPaypalLink = amount => {
-    const configuredLink = paypalLink.trim();
-    const baseLink = configuredLink.startsWith('http') ? configuredLink : paypalFallbackLink;
+    const baseLink = paypalFallbackLink;
     if (!amount) return baseLink;
 
     try {
@@ -110,18 +109,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('form').forEach(form => {
     if (form.classList.contains('payment-form')) return;
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
-      if (!btn) return;
-      const orig = btn.textContent;
-      btn.textContent = '✅ Submitted!';
-      btn.style.background = '#5CBF2A';
-      setTimeout(() => {
-        btn.textContent = orig;
-        btn.style.background = '';
+      const orig = btn?.textContent;
+      if (btn) {
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+      }
+
+      try {
+        const res = await fetch(form.action, {
+          method: form.method || 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!res.ok) throw new Error('Form submit failed');
+        if (btn) {
+          btn.textContent = '✅ Submitted!';
+          btn.style.background = '#5CBF2A';
+        }
         form.reset();
-      }, 3000);
+      } catch (error) {
+        if (btn) {
+          btn.textContent = 'Try Again';
+          btn.style.background = '#E8312A';
+        }
+      } finally {
+        setTimeout(() => {
+          if (!btn) return;
+          btn.textContent = orig || 'Submit';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      }
     });
   });
 
@@ -147,6 +169,53 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   syncDonationAmount(getDonationAmount());
+
+
+  const loadPaypalSdk = () => new Promise((resolve, reject) => {
+    if (window.paypal) {
+      resolve(window.paypal);
+      return;
+    }
+    const existing = document.querySelector('script[data-paypal-sdk]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.paypal));
+      existing.addEventListener('error', reject);
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(paypalClientId)}&currency=USD`;
+    script.dataset.paypalSdk = 'true';
+    script.addEventListener('load', () => resolve(window.paypal));
+    script.addEventListener('error', reject);
+    document.head.appendChild(script);
+  });
+
+  const renderPaypalButtons = async () => {
+    const container = document.querySelector('[data-paypal-button-container]');
+    if (!container) return;
+
+    try {
+      const paypal = await loadPaypalSdk();
+      if (!paypal?.Buttons) return;
+      paypal.Buttons({
+        createOrder: (_, actions) => actions.order.create({
+          purchase_units: [{
+            description: 'The STEM Club support',
+            amount: { value: (getDonationAmount() || '25').toString() }
+          }]
+        }),
+        onApprove: async (_, actions) => {
+          await actions.order.capture();
+          alert('Thank you for your donation!');
+        }
+      }).render(container);
+    } catch (error) {
+      container.innerHTML = '<p style="color:#9B1C1C; font-size:0.9rem;">PayPal failed to load. Please use the Donate button above.</p>';
+    }
+  };
+
+  renderPaypalButtons();
 
   document.querySelectorAll('[data-paypal-form]').forEach(form => {
     form.addEventListener('submit', event => {
