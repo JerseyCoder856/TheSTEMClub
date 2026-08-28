@@ -115,16 +115,16 @@
 
     <div class="volunteer-layout">
       <div class="volunteer-image"><img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1000&q=80" alt="Volunteers supporting students"/></div>
-      <form class="volunteer-form">
+      <form class="volunteer-form" action="https://formspree.io/f/mnjjyyao" method="POST">
       <div class="vf-row">
-        <input type="text" placeholder="Name" required/>
-        <input type="email" placeholder="Email" required/>
+        <input type="text" name="name" placeholder="Name" required/>
+        <input type="email" name="email" placeholder="Email" required/>
       </div>
       <div class="vf-row">
-        <input type="text" placeholder="Age"/>
-        <input type="tel" placeholder="Phone number"/>
+        <input type="text" name="age" placeholder="Age"/>
+        <input type="tel" name="phone" placeholder="Phone number"/>
       </div>
-      <textarea placeholder="Message"></textarea>
+      <textarea name="message" placeholder="Message"></textarea>
         <div class="vf-submit-row"><button type="submit" class="btn-submit-orange">Submit Now</button></div>
       </form>
     </div>

@@ -48,7 +48,7 @@
 
     <section class="checkout-contact-card">
       <h2>Contact Information</h2>
-      <form class="payment-form checkout-contact-form" data-paypal-form>
+      <form class="payment-form checkout-contact-form" data-paypal-form action="https://formspree.io/f/mnjjyyao" method="POST">
         <input type="hidden" name="item_name" value="The STEM Club support"/>
         <input type="hidden" name="amount" data-paypal-amount />
         <div class="vf-row">
@@ -66,6 +66,7 @@
         </div>
         <label>Notes<textarea name="notes" placeholder="Tell us if this is for a donation, shop order, sponsorship, or another purpose."></textarea></label>
         <button type="submit" class="paypal-btn">Donate with PayPal</button>
+        <div class="paypal-buttons" data-paypal-button-container></div>
       </form>
     </section>
   </main>
