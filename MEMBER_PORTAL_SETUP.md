@@ -1,5 +1,20 @@
 # The STEM Club Passport — production setup
 
+## Quick connection (4 steps)
+
+1. In your Supabase project, open **SQL Editor → New query**, paste all of `supabase/schema.sql`, and click **Run**.
+2. Open **Project Settings → API**. Copy the **Project URL** and the **publishable** key (the legacy `anon` key also works) into `portal-config.js`:
+   ```js
+   window.STEM_CLUB_SUPABASE = {
+     url: 'https://YOUR_PROJECT_REF.supabase.co',
+     anonKey: 'YOUR_PUBLISHABLE_KEY'
+   };
+   ```
+3. Open **Authentication → URL Configuration**. Set **Site URL** to `https://thestemclub.net` and add `https://thestemclub.net/login` as a redirect URL.
+4. Deploy, create your account at `/signup`, then promote it with the SQL command in step 6 below.
+
+Only the publishable/anon key belongs in `portal-config.js`. Never paste the database password or `service_role` key into a website file.
+
 ## Architecture
 
 The public website remains static HTML/CSS/JavaScript. The Passport adds Supabase Auth and managed PostgreSQL without exposing a database password or service-role key in the browser. PostgreSQL Row Level Security owns access control; security-definer functions perform public verification, atomic check-in, and bulk points operations.
