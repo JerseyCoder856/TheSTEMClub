@@ -2,7 +2,7 @@
 
 ## Quick connection (4 steps)
 
-1. In your Supabase project, open **SQL Editor → New query**, paste all of `supabase/schema.sql`, and click **Run**.
+1. In your Supabase project, open **SQL Editor → New query**, open the repository’s raw **`supabase/schema.sql`** file, copy its entire contents, paste it, and click **Run**.
 2. Open **Project Settings → API**. Copy the **Project URL** and the **publishable** key (the legacy `anon` key also works) into `portal-config.js`:
    ```js
    window.STEM_CLUB_SUPABASE = {
