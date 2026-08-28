@@ -3,11 +3,11 @@
 ## Quick connection (4 steps)
 
 1. In your Supabase project, open **SQL Editor → New query**, open the repository’s raw **`supabase/schema.sql`** file, copy its entire contents, paste it, and click **Run**.
-2. Open **Project Settings → API**. Copy the **Project URL** and the **publishable** key (the legacy `anon` key also works) into `portal-config.js`:
+2. The supplied **Project URL** and **publishable key** are already connected in `portal-config.js`:
    ```js
    window.STEM_CLUB_SUPABASE = {
-     url: 'https://YOUR_PROJECT_REF.supabase.co',
-     anonKey: 'YOUR_PUBLISHABLE_KEY'
+     url: 'https://dwiftepdopslglriwkgh.supabase.co',
+     anonKey: 'sb_publishable_Kv9zckv53THCl4p_PGBH7A_VZh1Xe_i'
    };
    ```
 3. Open **Authentication → URL Configuration**. Set **Site URL** to `https://thestemclub.net` and add `https://thestemclub.net/login` as a redirect URL.
