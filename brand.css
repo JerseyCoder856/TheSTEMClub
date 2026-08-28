@@ -1,0 +1,87 @@
+/* ==================================================
+   2026 brand language — inspired by the club's poster set
+   Bold black type, white editorial panels, yellow bands, and
+   small red/blue/green construction blocks carry across every page.
+   ================================================== */
+:root {
+  --poster-paper: #fffefa;
+  --poster-ink: #101010;
+  --poster-yellow: #ffd500;
+  --poster-red: #ef3428;
+  --poster-blue: #47aaf2;
+  --poster-green: #69c63d;
+  --poster-rule: 2px solid var(--poster-ink);
+  --poster-shadow: 8px 8px 0 rgba(16,16,16,.1);
+}
+body {
+  color: var(--poster-ink);
+  background-color: var(--poster-paper);
+  background-image: radial-gradient(rgba(16,16,16,.045) .7px, transparent .7px);
+  background-size: 7px 7px;
+}
+h1,h2,h3,h4,h5,h6 { color: var(--poster-ink); font-weight: 900; letter-spacing: -.045em; }
+.navbar {
+  background: rgba(255,254,250,.97);
+  border-bottom: 4px solid var(--poster-yellow);
+  box-shadow: 0 3px 0 var(--poster-ink);
+}
+.navbar::after {
+  content: "";
+  position: absolute;
+  right: 26px;
+  bottom: -10px;
+  width: 58px;
+  height: 14px;
+  background: linear-gradient(90deg,var(--poster-red) 0 34%,var(--poster-blue) 34% 70%,var(--poster-green) 70%);
+}
+.nav-links { color: var(--poster-ink); }
+.nav-links a:not(.btn-donate) { color: var(--poster-ink); }
+.btn-donate,.btn-pill-red,.btn-red-pill,.btn-donate-red {
+  background: var(--poster-red);
+  border: 2px solid var(--poster-ink);
+  box-shadow: 4px 4px 0 var(--poster-ink);
+}
+.btn-pill-yellow { background: var(--poster-yellow); }
+.btn-pill-green,.btn-green-pill { background: var(--poster-green); color: var(--poster-ink); }
+.btn-pill-yellow,.btn-pill-green,.btn-pill-white,.btn-pill-outline-dark,.btn-green-pill,.ws-btn,.checkout-btn,.btn-submit {
+  border: 2px solid var(--poster-ink);
+  border-radius: 9px;
+  box-shadow: 4px 4px 0 var(--poster-ink);
+}
+.btn-pill-yellow:hover,.btn-pill-green:hover,.btn-pill-white:hover,.btn-pill-red:hover,.btn-pill-outline-dark:hover,.btn-green-pill:hover,.btn-red-pill:hover,.btn-donate:hover {
+  transform: translate(2px,2px);
+  box-shadow: 2px 2px 0 var(--poster-ink);
+  opacity: 1;
+}
+.section-kicker { color: var(--poster-green); letter-spacing: .06em; }
+.section-kicker::before { width: 13px; height: 13px; border-radius: 2px; background: var(--poster-green); box-shadow: 17px 0 0 var(--poster-blue),34px 0 0 var(--poster-red); margin-right: 32px; }
+.mvv-section,.about-section,.workshops-section,.contact-section { background-color: var(--poster-paper); }
+.mvv-card,.workshop-card,.contact-form-card,.product-card,.checkout-card,.blog-card {
+  border: var(--poster-rule);
+  border-radius: 12px;
+  box-shadow: var(--poster-shadow);
+}
+.mvv-card { border-top: 14px solid var(--card-color); }
+.mvv-card::before { display:none; }
+.about-photo { border-radius: 12px; box-shadow: 5px 5px 0 var(--poster-ink); }
+.workshop-card { border-bottom: 13px solid var(--workshop-color); }
+.workshops-section {
+  background-image: linear-gradient(rgba(255,254,250,.93),rgba(255,254,250,.93)),linear-gradient(90deg,rgba(16,16,16,.09) 1px,transparent 1px),linear-gradient(rgba(16,16,16,.09) 1px,transparent 1px);
+}
+.support-work-banner { background: var(--poster-yellow); color: var(--poster-ink); border-block: var(--poster-rule); }
+.support-work-banner .sw-text h2,.support-work-banner .sw-text p { color: var(--poster-ink); }
+.site-footer { border-top: 12px solid var(--poster-yellow); }
+@media(max-width:700px){.navbar::after{right:15px}.navbar{border-bottom-width:3px}.section-kicker::before{margin-right:27px}}
+
+/* Page-specific surfaces share the same print-inspired geometry. */
+.home-hero { border-bottom: 12px solid var(--poster-yellow); }
+.change-world-tag { border: 2px solid #fff; border-radius: 7px; }
+.home-hero-left h1 { text-shadow: 4px 4px 0 rgba(0,0,0,.24); }
+.about-bold-quote { background: var(--poster-yellow); border: var(--poster-rule); border-left-width: 8px; border-radius: 8px; }
+.ws-body { border-top-width: 12px; }
+.ws-btn { background: var(--workshop-color); color: var(--poster-ink); }
+.blog-hero,.support-hero,.checkout-hero { border-bottom: 12px solid var(--poster-yellow); }
+.blog-card,.product-card { overflow:hidden; }
+.blog-card::after,.product-card::after { content:"";display:block;height:9px;background:linear-gradient(90deg,var(--poster-red) 0 25%,var(--poster-yellow) 25% 50%,var(--poster-blue) 50% 75%,var(--poster-green) 75%); }
+.cart-drawer-panel { border-left: 3px solid var(--poster-ink); }
+.contact-form-card input,.contact-form-card textarea,.checkout-form input,.checkout-form select { border: var(--poster-rule); border-radius: 7px; }
