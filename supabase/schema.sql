@@ -161,6 +161,8 @@ create table public.badges (
   criteria text,
   manual_award boolean not null default true,
   archived_at timestamptz,
+  criteria text,
+  manual_award boolean not null default true,
   created_by uuid references public.profiles(id) on delete set null,
   created_at timestamptz not null default now()
 );
@@ -536,6 +538,7 @@ begin
       when selected_membership.status = 'active' then 'checked_in'::public.check_in_status
       else 'override'::public.check_in_status
     end,
+    case when selected_membership.status = 'active' then 'checked_in' else 'override' end,
     auth.uid(),
     checkin_notes
   )
@@ -601,6 +604,11 @@ begin
   from public.attendance a
   where a.event_id = target_event
   on conflict (source_key) do nothing;
+    member_id, event_id, amount, reason, awarded_by
+  )
+  select a.member_id, target_event, points, trim(award_reason), auth.uid()
+  from public.attendance a
+  where a.event_id = target_event;
 
   get diagnostics recipient_count = row_count;
 
