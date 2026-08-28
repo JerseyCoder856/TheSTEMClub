@@ -14,6 +14,10 @@ The public website remains static HTML/CSS/JavaScript. The Passport adds Supabas
 6. Register the organization owner's account through `/signup`. The first registered account receives `TSC-0001`. In SQL Editor, promote only that account: `update public.profiles set role='admin' where id='AUTH_USER_UUID';` Obtain the UUID from Authentication → Users.
 7. Test login, then open `/admin`. Create an open workshop before using `/admin/attendance`.
 
+## Which login can I use?
+
+There is deliberately no shared or hardcoded password in this repository. After completing steps 1–5, open `/signup` and register the email and password you want to use for testing. In a fresh database that first account receives `TSC-0001`. If you promote that account with step 6, the same credentials can test both the member Passport and `/admin` because authorization comes from its database role. To test member restrictions separately, register a second account and leave its role as `member`; it receives `TSC-0002` and must be denied access to `/admin`.
+
 ## Hosting requirements
 
 The current deployment must serve each directory's `index.html` for extensionless routes. HTTPS is mandatory for phone camera access. If the host does not support directory indexes, add rewrites from `/my-card`, `/my-passport`, `/verify`, and `/admin/*` to their corresponding `index.html` files.
