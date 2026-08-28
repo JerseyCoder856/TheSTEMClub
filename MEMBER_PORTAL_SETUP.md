@@ -1,20 +1,30 @@
-# Member portal setup
+# The STEM Club Passport — production setup
 
-## What is included
+## Architecture
 
-This static website now includes branded member routes and a Supabase-backed authentication/data foundation. Authentication is performed by Supabase Auth; browser code never handles password hashing or payment/role decisions. The SQL schema creates member IDs, membership records, course hierarchy, moderated community data, events/attendance, achievements, and restrictive Row Level Security policies.
+The public website remains static HTML/CSS/JavaScript. The Passport adds Supabase Auth and managed PostgreSQL without exposing a database password or service-role key in the browser. PostgreSQL Row Level Security owns access control; security-definer functions perform public verification, atomic check-in, and bulk points operations.
 
-## Required external setup
+## One-time Supabase setup
 
-1. Create a Supabase project and run `supabase/schema.sql` in its SQL Editor.
-2. In **Authentication → URL Configuration**, add the production domain and the local development URL to the allowed redirect URLs, including `/login` for confirmation and password reset links.
-3. Add the Supabase project URL and **anon/publishable** key to `portal-config.js`. Do not put a service-role key in this website.
-4. Configure email confirmation and password-reset email templates in Supabase Auth. A production SMTP provider is recommended before launch.
-5. Create the initial user, then promote that specific user using the commented `update public.profiles` statement at the bottom of the schema. Do not grant admin from the browser.
-6. Ensure static hosting serves directory indexes for `/login`, `/member`, and the other portal routes. If the host requires rewrite rules for extensionless paths, add them in its hosting configuration.
+1. Create a **new Supabase project** (the schema is intended for a fresh project) and save its database password securely.
+2. Open **SQL Editor**, paste `supabase/schema.sql`, and run it once.
+3. In **Authentication → Providers → Email**, enable email/password. Require email confirmation for production and configure a production SMTP service.
+4. In **Authentication → URL Configuration**, set the Site URL to `https://thestemclub.net` and add `https://thestemclub.net/login`, plus local development URLs such as `http://localhost:8080/login`, to Redirect URLs.
+5. Copy the project URL and **publishable/anon key** from **Project Settings → API** into `portal-config.js`. The anon key is intentionally public and constrained by RLS. Never put the service-role key in this repository.
+6. Register the organization owner's account through `/signup`. The first registered account receives `TSC-0001`. In SQL Editor, promote only that account: `update public.profiles set role='admin' where id='AUTH_USER_UUID';` Obtain the UUID from Authentication → Users.
+7. Test login, then open `/admin`. Create an open workshop before using `/admin/attendance`.
 
-## Security notes
+## Hosting requirements
 
-* Membership status, member roles, achievements, attendance, and premium access are database-owned fields; there are no client-side controls that can update them.
-* RLS limits profiles and memberships to their owner (or an administrator), limits published premium material to active STEM Club members, and keeps community content in a pending/approved moderation flow.
-* No direct messages, public member directory, payment integration, QR scanner, or unmoderated publishing is included.
+The current deployment must serve each directory's `index.html` for extensionless routes. HTTPS is mandatory for phone camera access. If the host does not support directory indexes, add rewrites from `/my-card`, `/my-passport`, `/verify`, and `/admin/*` to their corresponding `index.html` files.
+
+The QR contains only `https://thestemclub.net/verify/?token=<random UUID>`. Status is looked up live, so deactivation does not require a replacement card. The public RPC returns only membership number, status, and issue/expiration dates.
+
+## Operational checks before launch
+
+- Confirm email delivery and password reset templates.
+- Confirm a member receives `TSC-0001` in a fresh database and later registrations increment without duplicates.
+- Confirm logged-out and member accounts cannot read or write admin data.
+- Scan a printed and on-screen card on iOS and Android over HTTPS.
+- Configure Supabase database backups and review Auth/audit logs regularly.
+- For minors, add the organization's approved guardian consent and privacy workflow before collecting additional personal data.
