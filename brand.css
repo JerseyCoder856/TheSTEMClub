@@ -690,3 +690,5 @@ main.portal-shell:has(> .admin-nav) > :not(.admin-nav) { grid-column: 2; }
  .workshop-card,.workshop-card:nth-child(2),.workshop-card:nth-child(3) { grid-template-columns: 1fr; }
  .simple-donation-form .campaign-amounts { grid-template-columns: repeat(2,1fr); }
 }
+.profile-avatar-photo { width: 76px; height: 76px; flex: 0 0 76px; object-fit: cover; border: 3px solid var(--brand-blue); }
+[data-event-registration] { margin-top: 18px; }

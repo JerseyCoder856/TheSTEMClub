@@ -66,3 +66,8 @@ Run `supabase/migrations/202608290002_admin_point_bank.sql` next. It creates an
 RLS-enabled 10,000-point teacher reward bank and a database-authorized atomic
 award function. Only an active `admin` can read their bank or issue rewards;
 the debit and member ledger entry succeed or fail together.
+
+Run `supabase/migrations/202608290003_owner_avatar_access.sql` third. It
+reasserts the configured owner as an active database administrator, keeps the
+owner membership active, adds the private `profile-photos` bucket, and allows
+members to manage only photos stored under their own authenticated UUID.
