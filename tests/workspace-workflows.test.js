@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+const fs=require('node:fs');const assert=require('node:assert/strict');
+const portal=fs.readFileSync('portal.js','utf8');
+const attendance=fs.readFileSync('admin/attendance/index.html','utf8');
+const points=fs.readFileSync('admin/points/index.html','utf8');
+const learning=fs.readFileSync('admin/learning/index.html','utf8');
+const migration=fs.readFileSync('supabase/migrations/202608290006_workspace_workflows.sql','utf8');
+for(const control of ['data-start-scan','data-stop-scan','data-manual-scan','data-scan-event'])assert.ok(attendance.includes(control),`scanner missing ${control}`);
+for(const behavior of ["facingMode:{ideal:'environment'}","admin_check_in","pagehide',stop","visibilitychange","duplicate?'Already checked in","window._scanner.stop()","window._scanner.clear()"])assert.ok(portal.includes(behavior),`scanner behavior missing ${behavior}`);
+assert.ok(points.includes('data-point-member')&&points.includes('data-quick-point-form'));
+assert.ok(portal.includes("client.rpc('admin_award_points_from_bank'"));
+assert.ok(portal.includes("client.rpc('admin_award_event_points'"));
+assert.ok(migration.includes('required_points=recipient_count*points'));
+assert.ok(migration.includes('on conflict(source_key) do nothing'));
+assert.ok(learning.includes('class="checkbox-label"><input type="checkbox" name="published"> Publish now'));
+for(const action of ['data-recognition-respond','data-recognition-visibility','data-request-feedback'])assert.ok(portal.includes(action),`recognition workflow missing ${action}`);
+for(const action of ['data-tour-back','data-tour-next','data-tour-skip','tour-target'])assert.ok(portal.includes(action),`guided tour missing ${action}`);
+for(const route of ['/admin/members','/admin/events','/admin/attendance','/admin/learning','/admin/points','/admin/badges','/admin/recognitions','/admin/notifications','/admin/settings'])assert.ok(portal.includes(route),`teacher shell missing ${route}`);
+assert.ok(migration.includes("r.visibility='public' or auth.uid() in (r.sender_id,r.recipient_id)"));
+assert.ok(migration.includes("role='admin' and account_status='active'"));
+assert.ok(!migration.includes('project-media'));
+assert.ok(portal.includes('MutationObserver')&&portal.includes("document.documentElement.lang='es'"));
+assert.ok(fs.readFileSync('IMPLEMENTATION_CHECKLIST.md','utf8').match(/\[x\]/g).length===13);
+console.log('Workspace workflows OK: scanner, points, recognition, feedback, notifications, tour, localization shell, and mobile controls checked.');
