@@ -28,3 +28,14 @@ assert.ok(!/\b[a-z]+\\_[a-z]+\b/.test(schema), 'schema contains escaped Markdown
 assert.equal((schema.match(/^begin;$/gm) || []).length, 1);
 assert.equal((schema.match(/^commit;$/gm) || []).length, 1);
 console.log(`Portal contract OK: ${tables.length} RLS tables and all frontend RPCs are defined.`);
+
+const resetPage = fs.readFileSync('reset-password/index.html', 'utf8');
+assert.equal(
+  (portal.match(/resetPasswordForEmail\(email,\{redirectTo:'https:\/\/thestemclub\.net\/reset-password'\}\)/g) || []).length,
+  1,
+  'password recovery must use the production reset page'
+);
+assert.ok(!/resetPasswordForEmail[^\n]*localhost/.test(portal), 'password recovery must not use localhost');
+assert.ok(resetPage.includes('data-auth="reset-password"'), 'reset page must provide the password form');
+assert.ok(portal.includes('client.auth.updateUser({password})'), 'reset form must update the Supabase user');
+assert.ok(portal.includes("location.assign('/login')"), 'successful password reset must return to login');

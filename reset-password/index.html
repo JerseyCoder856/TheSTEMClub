@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Choose a New Password — The STEM Club</title>
+  <link rel="stylesheet" href="/shared.css">
+  <link rel="stylesheet" href="/portal.css">
+  <link rel="stylesheet" href="/brand.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="logo"><img src="/m.png" alt="The STEM Club"></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+      <li><a href="/support.html">Support Us</a></li>
+      <li><a href="/checkout.html" class="btn-donate">DONATE</a></li>
+    </ul>
+  </nav>
+  <main class="portal-shell">
+    <section class="portal-form-wrap portal-card">
+      <p class="section-kicker">Member access</p>
+      <h1>Choose a new password</h1>
+      <p class="portal-note">Enter and confirm your new password.</p>
+      <form class="portal-form" data-auth="reset-password">
+        <label>New password<input name="password" type="password" autocomplete="new-password" minlength="8" required></label>
+        <label>Confirm new password<input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required></label>
+        <button class="btn-pill-green" type="submit">Update Password</button>
+      </form>
+      <p class="portal-message" data-portal-message aria-live="polite"></p>
+      <p class="portal-note"><a href="/login">Back to Log In</a></p>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/portal-config.js"></script>
+  <script src="/portal.js"></script>
+  <script src="/main.js"></script>
+</body>
+</html>
