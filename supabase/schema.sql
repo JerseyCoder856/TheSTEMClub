@@ -399,7 +399,7 @@ for each row execute function public.handle_new_user();
 -- no existing memberships.
 do $$
 declare
-  owner_email constant text := '[MY EMAIL ADDRESS]';
+  owner_email constant text := 'jeremiah@thestemclub.net';
   existing_memberships bigint;
   user_record record;
 begin
