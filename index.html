@@ -17,23 +17,36 @@
     </a>
 
 
-   
-    <ul class="nav-links">
+
+    <ul class="nav-links" aria-label="Primary navigation">
       <li><a href="index.html" class="active">Home</a></li>
+      <li class="nav-dropdown">
+        <a href="index.html#workshops" aria-haspopup="true">Programs <span aria-hidden="true">⌄</span></a>
+        <div class="nav-dropdown-menu" aria-label="Programs">
+          <a href="#workshops">Mechanical</a>
+          <a href="#workshops">Electrical</a>
+          <a href="#workshops">Computer Science</a>
+          <a href="#workshops">Robotics Campaign</a>
+        </div>
+      </li>
       <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#workshops">Workshops</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="support.html">Support Us</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-      <li><a href="login" class="member-access-link" data-member-access>Membership</a></li>
-      <li><a href="checkout.html" class="btn-donate">DONATE</a></li>
-      <li><a href="support.html#shop" class="nav-cart" data-cart-nav aria-label="Shopping cart"><span aria-hidden="true">🛒</span><span class="nav-cart-count" data-cart-count>0</span></a></li>
+      <li class="nav-dropdown">
+        <a href="support.html" aria-haspopup="true">Get Involved <span aria-hidden="true">⌄</span></a>
+        <div class="nav-dropdown-menu" aria-label="Get involved">
+          <a href="support.html#volunteer">Volunteer</a>
+          <a href="support.html">Partner with us</a>
+          <a href="support.html#shop">Shop to support</a>
+        </div>
+      </li>
+      <li><a href="checkout.html" class="btn-donate">Donate</a></li>
+      <li><a href="login" class="member-access-link" data-member-access>Member Login</a></li>
     </ul>
   </nav>
 
   <!-- HERO — split red left / blue right -->
   <section class="home-hero">
     <div class="home-hero-left">
+      <p class="change-world-tag">Curiosity becomes capability here.</p>
       <h1>Building bright futures through STEM.</h1>
       <p class="hero-subtitle">The STEM Club creates welcoming workshops, mentorship, and community projects that help students discover science, technology, engineering, and math with confidence.</p>
       <div class="hero-btns">
@@ -43,16 +56,18 @@
     </div>
     <div class="home-hero-right">
       <div class="hero-video-thumb">
-        <img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=500&q=80" alt="STEM Workshop"/>
-        <div class="play-btn">
-          <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="30" fill="rgba(255,255,255,0.25)"/><polygon points="24,18 46,30 24,42" fill="#fff"/></svg>
-        </div>
+        <img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=1400&q=88" alt="Hands-on STEM workshop equipment"/>
+        <p class="hero-photo-label"><strong>Explore. Build. Belong.</strong><span>Practical STEM experiences with room to grow.</span></p>
       </div>
     </div>
   </section>
 
   <!-- MISSION / VISION / VALUES cards -->
   <section class="mvv-section">
+    <div class="section-intro section-intro--center">
+      <p class="section-kicker">Our foundation</p>
+      <h2>Big ideas need a place to begin.</h2>
+    </div>
     <div class="mvv-grid">
       <!-- Mission — blue -->
       <div class="mvv-card mvv-blue">
@@ -75,8 +90,8 @@
         <div class="mvv-icon" aria-hidden="true">
           <svg viewBox="0 0 96 96" role="img" focusable="false"><path d="M24 20h48v36c0 17-12 28-24 34-12-6-24-17-24-34V20Z" fill="#fff4bf"/><path d="M35 49 45 59 64 36" fill="none" stroke="#0d4f80" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="21" r="9" fill="#29ABE2"/><circle cx="72" cy="21" r="9" fill="#5CBF2A"/><path d="M24 31v21M72 31v21" stroke="#F5C518" stroke-width="8" stroke-linecap="round"/></svg>
         </div>
-        <h3>Values</h3>
-        <p>Curiosity, service, teamwork, creativity, and belonging guide every workshop, volunteer experience, and partnership.</p>
+        <h3>Values & a clear path into STEM</h3>
+        <p>Curiosity, service, teamwork, creativity, and belonging guide four featured pathways—mechanical, electrical, computer science, and robotics—and three ways to help: volunteer, partner, or support a workshop.</p>
       </div>
     </div>
   </section>
@@ -89,7 +104,7 @@
         <h2 class="about-title">A student-centered nonprofit for hands-on <span class="stem-colored">STEM</span> discovery</h2>
         <div class="about-photos">
           <img src="https://i.imgur.com/lbb46Tb.jpeg" alt="STEM 1" class="about-photo border-red"/>
-          <img src="https://i.imgur.com/FaX9wHi.jpeg" class="about-photo border-green"/>
+          <img src="https://i.imgur.com/FaX9wHi.jpeg" alt="Students collaborating during a STEM activity" class="about-photo border-green"/>
           <img src="https://i.imgur.com/XC62kBT.jpeg" alt="STEM 3" class="about-photo border-blue"/>
           <img src="https://i.imgur.com/EGZzQyi.jpeg" alt="STEM 4" class="about-photo border-yellow"/>
         </div>
@@ -112,7 +127,7 @@
   <section class="workshops-section" id="workshops">
     <div class="workshops-title-deco">
       <div class="dash yellow-dash"></div>
-      <h2>Workshops</h2>
+      <div><p class="section-kicker">Choose a pathway</p><h2>Workshops</h2></div>
       <div class="dash yellow-dash"></div>
     </div>
     <div class="workshop-cards">
@@ -123,7 +138,7 @@
         <div class="ws-body">
           <h3>Mechanical</h3>
           <p>Example lesson: students could design a simple assistive device, sketch the idea, model it in CAD, test materials, and learn how gears, levers, measurements, and 3D printing turn an idea into a working prototype.</p>
-          <a href="#contact" class="ws-btn">Contact Us</a>
+
         </div>
       </article>
       <article class="workshop-card ws-yellow">
@@ -133,7 +148,7 @@
         <div class="ws-body">
           <h3>Electrical</h3>
           <p>Example lesson: students could build a light-up safety badge or mini alarm while learning voltage, resistance, breadboards, sensors, LEDs, and how engineers troubleshoot circuits safely.</p>
-          <a href="#contact" class="ws-btn">Contact Us</a>
+
         </div>
       </article>
       <article class="workshop-card ws-blue">
@@ -143,7 +158,7 @@
         <div class="ws-body">
           <h3>Computer</h3>
           <p>Example lesson: students could code an interactive game or robot controller, learning variables, loops, logic, debugging, user experience, and how software can solve real community problems.</p>
-          <a href="#contact" class="ws-btn">Contact Us</a>
+
         </div>
       </article>
       <article class="workshop-card ws-green">
@@ -193,30 +208,28 @@
       <div class="dash"></div>
     </div>
     <div class="contact-layout">
-      <form class="contact-form-card">
+      <form class="contact-form-card" data-mailto-form data-recipient="jeremiah@thestemclub.net">
       <div class="form-row">
         <div class="form-group">
-          <label>First Name *</label>
-          <input type="text" placeholder="Jane"/>
+          <label for="contact-first">First Name *</label>
+          <input id="contact-first" name="firstName" type="text" autocomplete="given-name" required/>
         </div>
         <div class="form-group">
-          <label>Last Name *</label>
-          <input type="text" placeholder="Smith"/>
+          <label for="contact-last">Last Name *</label>
+          <input id="contact-last" name="lastName" type="text" autocomplete="family-name" required/>
         </div>
       </div>
       <div class="form-group">
-        <label>Email *</label>
-        <input type="email" placeholder="jane@example.com"/>
+        <label for="contact-email">Email *</label>
+        <input id="contact-email" name="email" type="email" autocomplete="email" required/>
       </div>
       <div class="form-group">
-        <label>Message</label>
-        <textarea placeholder="Tell us about your interest..."></textarea>
+        <label for="contact-message">Message *</label>
+        <textarea id="contact-message" name="message" required></textarea>
       </div>
         <button type="submit" class="btn-submit">Submit</button>
       </form>
-      <div class="contact-map" aria-label="Map of South Jersey">
-        <iframe title="South Jersey map" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-75.60%2C38.85%2C-73.90%2C40.35&amp;layer=mapnik&amp;marker=39.70%2C-74.80"></iframe>
-      </div>
+      <aside class="contact-intro"><p class="section-kicker">Start a conversation</p><h3>Let’s build something useful together.</h3><p>Ask about workshops, volunteering, partnerships, or bringing hands-on STEM learning to your community.</p><ul><li>Workshop questions</li><li>Volunteer and mentor interest</li><li>Community partnerships</li></ul></aside>
     </div>
   </section>
 
@@ -258,8 +271,8 @@
   </div>
 
   <p class="footer-legal">
-    <a href="#">Privacy Policy</a> &nbsp;
-    <a href="#">Legal</a> &nbsp;
+    <a href="/privacy.html">Privacy Policy</a> &nbsp;
+    <a href="/legal.html">Legal</a> &nbsp;
     © 2025 The STEM Club. All rights reserved.
   </p>
 

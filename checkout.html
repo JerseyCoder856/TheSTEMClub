@@ -12,60 +12,27 @@
     <a href="index.html" class="logo" aria-label="The STEM Club home">
       <img src="/m.png" alt="The STEM Club"/>
     </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#workshops">Workshops</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="support.html">Support Us</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-      <li><a href="login" class="member-access-link" data-member-access>Log In</a></li>
-      <li><a href="checkout.html" class="btn-donate active">DONATE</a></li>
-      <li><a href="support.html#shop" class="nav-cart" data-cart-nav aria-label="Shopping cart"><span aria-hidden="true">🛒</span><span class="nav-cart-count" data-cart-count>0</span></a></li>
+    <ul class="nav-links" aria-label="Primary navigation">
+      <li><a href="/">Home</a></li>
+      <li class="nav-dropdown"><a href="/#workshops" aria-haspopup="true">Programs <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Programs"><a href="/#workshops">Mechanical</a><a href="/#workshops">Electrical</a><a href="/#workshops">Computer Science</a><a href="/#workshops">Robotics Campaign</a></div></li>
+      <li><a href="/#about">About</a></li>
+      <li class="nav-dropdown"><a href="/support.html" aria-haspopup="true">Get Involved <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Get involved"><a href="/support.html#volunteer">Volunteer</a><a href="/support.html">Partner with us</a><a href="/support.html#shop">Shop to support</a></div></li>
+      <li><a href="/checkout.html" class="btn-donate">Donate</a></li>
+      <li><a href="/login" class="member-access-link" data-member-access>Member Login</a></li>
     </ul>
   </nav>
 
-  <main class="checkout-page" id="payment">
-    <section class="checkout-campaign-card">
-      <div class="checkout-campaign-heading">
-        <p class="section-kicker section-kicker-blue">Our Campaign</p>
-        <h1>Complete your support for <span>STEM access.</span></h1>
-        <p>Choose a giving amount or use your cart total. Then share your contact details so we can follow up before you continue to PayPal.</p>
-      </div>
-
-      <div class="campaign-progress" aria-label="Campaign progress toward $5,000 goal">
-        <div class="campaign-progress-label"><span>$750 donated</span><span>$5,000 goal</span></div>
-        <div class="campaign-bar"><span style="width: 20%"></span></div>
-      </div>
-      <div class="campaign-amounts" data-donation-amounts>
-        <button type="button" data-amount="25">$25</button>
-        <button type="button" data-amount="50">$50</button>
-        <button type="button" data-amount="75">$75</button>
-        <button type="button" data-amount="100">$100</button>
-      </div>
-      <input class="campaign-custom" type="number" min="1" step="1" placeholder="Custom..." data-donation-custom data-payment-amount />
-    </section>
-
-    <section class="checkout-contact-card">
-      <h2>Contact Information</h2>
-      <form class="payment-form checkout-contact-form" data-paypal-form>
-        <input type="hidden" name="item_name" value="The STEM Club support"/>
-        <input type="hidden" name="amount" data-paypal-amount />
-        <div class="vf-row">
-          <label>First Name *<input type="text" name="first_name" required/></label>
-          <label>Last Name *<input type="text" name="last_name" required/></label>
-        </div>
-        <div class="vf-row">
-          <label>Email *<input type="email" name="email" required/></label>
-          <label>Phone<input type="tel" name="phone"/></label>
-        </div>
-        <label>Address<input type="text" name="address" placeholder="Street address"/></label>
-        <div class="vf-row">
-          <label>City<input type="text" name="city"/></label>
-          <label>State / ZIP<input type="text" name="state_zip"/></label>
-        </div>
-        <label>Notes<textarea name="notes" placeholder="Tell us if this is for a donation, shop order, sponsorship, or another purpose."></textarea></label>
-        <button type="submit" class="paypal-btn">Donate with PayPal</button>
+  <main class="donate-page" id="payment">
+    <header class="donate-header"><p class="section-kicker">Support The STEM Club</p><h1>Help make hands-on STEM possible.</h1><p>Choose an amount. You will continue to PayPal to complete your donation securely.</p></header>
+    <section class="donate-card">
+      <h2>Make a donation</h2>
+      <p class="donate-purpose">Your support helps provide workshop materials, robotics equipment, student projects, and outreach events.</p>
+      <form class="payment-form simple-donation-form" data-paypal-form>
+        <input type="hidden" name="amount" data-paypal-amount>
+        <fieldset><legend>Select an amount</legend><div class="campaign-amounts" data-donation-amounts><button type="button" data-amount="25">$25</button><button type="button" data-amount="50">$50</button><button type="button" data-amount="75">$75</button><button type="button" data-amount="100">$100</button></div></fieldset>
+        <label>Or enter another amount ($)<input class="campaign-custom" type="number" min="1" step="1" inputmode="decimal" data-donation-custom data-payment-amount required></label>
+        <button type="submit" class="paypal-btn">Continue to PayPal</button>
+        <p class="portal-note">PayPal opens in a new tab. No payment details are stored on this website.</p>
       </form>
     </section>
   </main>
@@ -77,7 +44,7 @@
       <a href="https://www.instagram.com/thestemclubnj/" target="_blank" class="social-circle" title="Instagram"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="Instagram"></a>
       <a href="https://www.linkedin.com/company/the-stem-club-nj/" target="_blank" class="social-circle" title="LinkedIn"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn"></a>
     </div>
-    <p class="footer-legal"><a href="#">Privacy Policy</a> &nbsp; <a href="#">Legal</a> &nbsp; © 2025 The STEM Club. All rights reserved.</p>
+    <p class="footer-legal"><a href="/privacy.html">Privacy Policy</a> &nbsp; <a href="/legal.html">Legal</a> &nbsp; © 2025 The STEM Club. All rights reserved.</p>
   </footer>
 
   <aside class="cart-drawer" data-cart-drawer aria-live="polite">

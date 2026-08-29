@@ -14,16 +14,13 @@
     <a href="index.html" class="logo" aria-label="The STEM Club home">
       <img src="/m.png" alt="The STEM Club"/>
     </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#workshops">Workshops</a></li>
-      <li><a href="blog.html" class="active">Blog</a></li>
-      <li><a href="support.html">Support Us</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-      <li><a href="login" class="member-access-link" data-member-access>Log In</a></li>
-      <li><a href="checkout.html" class="btn-donate">DONATE</a></li>
-      <li><a href="support.html#shop" class="nav-cart" data-cart-nav aria-label="Shopping cart"><span aria-hidden="true">🛒</span><span class="nav-cart-count" data-cart-count>0</span></a></li>
+    <ul class="nav-links" aria-label="Primary navigation">
+      <li><a href="/">Home</a></li>
+      <li class="nav-dropdown"><a href="/#workshops" aria-haspopup="true">Programs <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Programs"><a href="/#workshops">Mechanical</a><a href="/#workshops">Electrical</a><a href="/#workshops">Computer Science</a><a href="/#workshops">Robotics Campaign</a></div></li>
+      <li><a href="/#about">About</a></li>
+      <li class="nav-dropdown"><a href="/support.html" aria-haspopup="true">Get Involved <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Get involved"><a href="/support.html#volunteer">Volunteer</a><a href="/support.html">Partner with us</a><a href="/support.html#shop">Shop to support</a></div></li>
+      <li><a href="/checkout.html" class="btn-donate">Donate</a></li>
+      <li><a href="/login" class="member-access-link" data-member-access>Member Login</a></li>
     </ul>
   </nav>
 
@@ -150,25 +147,23 @@
       <div class="dash"></div>
     </div>
     <div class="contact-form-card">
+      <form data-mailto-form data-recipient="jeremiah@thestemclub.net">
       <div class="form-row">
         <div class="form-group">
-          <label>First Name *</label>
-          <input type="text" placeholder="Jane"/>
+          <label>First Name *<input name="firstName" type="text" autocomplete="given-name" required/></label>
         </div>
         <div class="form-group">
-          <label>Last Name *</label>
-          <input type="text" placeholder="Smith"/>
+          <label>Last Name *<input name="lastName" type="text" autocomplete="family-name" required/></label>
         </div>
       </div>
       <div class="form-group">
-        <label>Email *</label>
-        <input type="email" placeholder="jane@example.com"/>
+        <label>Email *<input name="email" type="email" autocomplete="email" required/></label>
       </div>
       <div class="form-group">
-        <label>Message</label>
-        <textarea placeholder="Tell us about your interest..."></textarea>
+        <label>Message *<textarea name="message" required></textarea></label>
       </div>
-      <button class="btn-submit" onclick="event.preventDefault()">Submit</button>
+      <button type="submit" class="btn-submit">Submit</button>
+      </form>
     </div>
   </section>
 
@@ -210,8 +205,8 @@
   </div>
 
   <p class="footer-legal">
-    <a href="#">Privacy Policy</a> &nbsp;
-    <a href="#">Legal</a> &nbsp;
+    <a href="/privacy.html">Privacy Policy</a> &nbsp;
+    <a href="/legal.html">Legal</a> &nbsp;
     © 2025 The STEM Club. All rights reserved.
   </p>
 
