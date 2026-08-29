@@ -46,9 +46,18 @@ manual checklist below passes.
 
 ## Known unfinished scope
 
-Interest-tag targeting, announcement delivery/read state, safe point transfers, project-image
-Storage policies/uploads, and the full course authoring expansion requested in the redesign brief
+Interest-tag targeting, announcement delivery/read state, safe member-to-member point transfers,
+and the full course authoring expansion requested in the redesign brief
 are not implemented in this repair commit. Existing events, attendance, points, badges, learning,
 community, recognition, outreach, and audit features remain in place; they require the production
 two-account verification above. Google Sheets synchronization, outbound email, and web push are
 not configured and must not be advertised as active.
+
+## Media migration added
+
+Run `supabase/migrations/202608290001_portal_media_storage.sql` once in the
+Supabase SQL Editor after the base schema. It creates the private `project-media`
+bucket and public-read `badge-assets` bucket with MIME limits, ownership rules,
+administrator-only badge writes, and approved-project signed-read policies. Do
+not manually make `project-media` public. The portal generates unique filenames;
+no service-role key is used in the browser.

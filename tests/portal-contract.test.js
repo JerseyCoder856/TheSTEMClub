@@ -14,7 +14,8 @@ for (const table of tables) {
   assert.equal((schema.match(new RegExp(`create table public\\.${table} \\(`, 'g')) || []).length, 1, `${table} must be defined once`);
   assert.ok(schema.includes(`alter table public.${table} enable row level security;`), `${table} must have RLS`);
 }
-for (const table of [...portal.matchAll(/\.from\('([^']+)'\)/g)].map(m => m[1])) {
+const storageBuckets = ['project-media', 'badge-assets'];
+for (const table of [...portal.matchAll(/\.from\('([^']+)'\)/g)].map(m => m[1]).filter(name => !storageBuckets.includes(name))) {
   assert.ok(tables.includes(table), `portal table ${table} is missing`);
 }
 for (const rpc of [...portal.matchAll(/\.rpc\('([^']+)'/g)].map(m => m[1])) {
@@ -30,6 +31,9 @@ assert.equal((schema.match(/^commit;$/gm) || []).length, 1);
 console.log(`Portal contract OK: ${tables.length} RLS tables and all frontend RPCs are defined.`);
 
 const resetPage = fs.readFileSync('reset-password/index.html', 'utf8');
+const mediaMigration = fs.readFileSync('supabase/migrations/202608290001_portal_media_storage.sql', 'utf8');
+for (const bucket of storageBuckets) assert.ok(mediaMigration.includes(`'${bucket}'`), `${bucket} storage setup is missing`);
+assert.ok(mediaMigration.includes("public.is_admin()"), 'badge uploads must remain administrator-authorized');
 assert.equal(
   (portal.match(/resetPasswordForEmail\(email,\{redirectTo:'https:\/\/thestemclub\.net\/reset-password'\}\)/g) || []).length,
   1,

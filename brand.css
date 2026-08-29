@@ -593,3 +593,55 @@ p { text-wrap: pretty; }
   .home-facts-grid > div { min-height: 0; }
   .home-hero-left::after { display: block; }
 }
+
+/* Requested homepage banner, quiet dropdown indicator, and classroom portal shell. */
+.nav-dropdown > a span { font-size: 0; transform: none !important; }
+.nav-dropdown > a span::before { content: "⌄"; font-size: 1rem; }
+.nav-dropdown:hover > a span::before,.nav-dropdown:focus-within > a span::before { content: "⌃"; }
+.nav-dropdown-menu { padding: 8px 0 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.nav-dropdown-menu a { margin-top: 5px; background: #fff; border: 1px solid #9fc5d8; border-left: 5px solid var(--brand-blue); box-shadow: 0 4px 10px rgba(23,39,51,.08); }
+
+.home-hero {
+  min-height: 720px;
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  background: linear-gradient(90deg,rgba(41,171,226,.98) 0 45%,rgba(41,171,226,.35) 66%,transparent 82%),url("A.png") center/cover no-repeat;
+}
+.home-hero-left { width: min(760px,58%); min-height: 720px; padding-left: max(40px,calc((100vw - 1400px)/2)); background: transparent; border-radius: 0; }
+.home-hero-left::after { display: none; }
+.home-hero-right { display: none !important; }
+
+/* Bright classroom-like application: teacher/admin and student/member remain database roles. */
+.portal-hero { background: var(--brand-blue); color: #102f42; border-radius: 8px; box-shadow: none; }
+.portal-hero::after { display: none; }
+.portal-hero h1,.portal-hero p,.portal-kicker { color: #102f42; }
+.portal-layout { grid-template-columns: 285px minmax(0,1fr); gap: 32px; }
+.portal-side { padding: 18px; border: 2px solid #b7d4e2; border-top: 8px solid var(--brand-blue) !important; }
+.portal-side::before { content: "Student workspace"; display: block; padding: 10px 13px 17px; color: #102f42; font-size: .78rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.portal-side a { margin: 3px 0; padding: 13px 14px; border-left: 4px solid transparent; border-radius: 3px; }
+.portal-side a:hover,.portal-side a.active { background: #eaf8ff; border-left-color: var(--brand-blue); }
+
+main.portal-shell:has(> .admin-nav) { max-width: none; display: grid; grid-template-columns: 285px minmax(0,1fr); gap: 32px; padding: 32px clamp(24px,4vw,60px) 80px; align-items: start; }
+main.portal-shell:has(> .admin-nav) > :not(.admin-nav) { grid-column: 2; }
+.admin-nav { grid-column: 1; grid-row: 1 / span 60; position: sticky; top: 100px; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 3px; padding: 18px; background: #fff; border: 2px solid #b7d4e2; border-top: 8px solid var(--brand-red); }
+.admin-nav::before { content: "Teacher workspace"; display: block; padding: 10px 12px 17px; color: #102f42; font-size: .78rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.admin-nav a { width: 100%; padding: 13px 14px; border: 0; border-left: 4px solid transparent; border-radius: 3px; box-shadow: none; }
+.admin-nav a:hover,.admin-nav a:focus-visible { background: #fff4d3; border-left-color: var(--brand-yellow); }
+.member-card { background: var(--brand-blue); color: #102f42; }
+.member-card h1,.member-card h2,.member-card p { color: #102f42; }
+.badge-art { width: 92px; height: 92px; object-fit: contain; background: #fff; border: 2px solid #acd0e1; }
+.project-media { display: block; width: 100%; max-height: 520px; margin: 16px 0 20px; object-fit: contain; background: #edf8fd; border: 2px solid #acd0e1; }
+
+@media(max-width:900px) {
+  .home-hero { min-height: 680px; background: linear-gradient(rgba(41,171,226,.82),rgba(41,171,226,.82)),url("A.png") center/cover; }
+  .home-hero-left { width: 100%; min-height: 680px; padding-inline: 28px; }
+  .portal-layout { grid-template-columns: 1fr; }
+  .portal-side { position: static; display: flex; overflow-x: auto; flex-wrap: nowrap; }
+  .portal-side::before { display: none; }
+  .portal-side a { white-space: nowrap; }
+  main.portal-shell:has(> .admin-nav) { display: block; padding-inline: 18px; }
+  .admin-nav { position: static; flex-direction: row; overflow-x: auto; margin-bottom: 24px; }
+  .admin-nav::before { display: none; }
+  .admin-nav a { width: auto; white-space: nowrap; }
+}
