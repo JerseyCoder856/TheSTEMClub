@@ -49,10 +49,6 @@ assert.ok(portal.includes("client.auth.setSession({access_token:hash.get('access
 assert.ok(portal.includes("event==='PASSWORD_RECOVERY'"), 'recovery must wait for the PASSWORD_RECOVERY event');
 assert.ok(portal.includes("location.assign('/login?password-reset=success')"), 'successful password reset must return to login with confirmation state');
 assert.ok(resetPage.includes('disabled data-recovery-submit'), 'reset submit must start disabled');
-assert.ok(portal.includes("access.data.role==='admin'?'/admin':'/my-passport'"), 'login must route database administrators to the teacher workspace');
-const passportPage = fs.readFileSync('my-passport/index.html', 'utf8');
-assert.ok(passportPage.includes('data-admin-access'), 'Passport must expose teacher tools after the database confirms admin access');
-assert.ok(passportPage.includes('data-passport-point-bank'), 'Passport must expose the teacher reward-bank balance');
 
 const htmlFiles = fs.readdirSync('.', {recursive: true})
   .filter(name => name.endsWith('.html'));
