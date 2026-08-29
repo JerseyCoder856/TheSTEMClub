@@ -5,6 +5,7 @@ const schema = fs.readFileSync('supabase/schema.sql', 'utf8');
 const migrations = fs.readdirSync('supabase/migrations').map(file => fs.readFileSync(`supabase/migrations/${file}`, 'utf8')).join('\n');
 const databaseSql = `${schema}\n${migrations}`;
 const portal = fs.readFileSync('portal.js', 'utf8');
+const portalUx = fs.readFileSync('portal-ux.js', 'utf8');
 const tables = [
   'profiles','memberships','events','attendance','point_transactions','badges',
   'member_badges','audit_logs','event_registrations','courses','course_modules',
@@ -20,7 +21,7 @@ const storageBuckets = ['project-media', 'badge-assets', 'profile-photos'];
 for (const table of [...portal.matchAll(/\.from\('([^']+)'\)/g)].map(m => m[1]).filter(name => !storageBuckets.includes(name))) {
   assert.ok(tables.includes(table), `portal table ${table} is missing`);
 }
-for (const rpc of [...portal.matchAll(/\.rpc\('([^']+)'/g)].map(m => m[1])) {
+for (const rpc of [...`${portal}\n${portalUx}`.matchAll(/\.rpc\('([^']+)'/g)].map(m => m[1])) {
   assert.ok(databaseSql.includes(`function public.${rpc}(`), `portal RPC ${rpc} is missing`);
 }
 assert.ok(schema.includes("default ('TSC-' || lpad(nextval('public.membership_number_seq')::text, 4, '0'))"));
@@ -49,6 +50,12 @@ assert.ok(portal.includes("client.auth.setSession({access_token:hash.get('access
 assert.ok(portal.includes("event==='PASSWORD_RECOVERY'"), 'recovery must wait for the PASSWORD_RECOVERY event');
 assert.ok(portal.includes("location.assign('/login?password-reset=success')"), 'successful password reset must return to login with confirmation state');
 assert.ok(resetPage.includes('disabled data-recovery-submit'), 'reset submit must start disabled');
+assert.ok(portal.includes("access.role==='admin'?'/admin':'/my-passport'"), 'login must route database administrators to the teacher workspace');
+assert.ok(portal.includes(".eq('id',userId).maybeSingle()"), 'profile lookup must tolerate a missing row and report it explicitly');
+assert.ok(portal.includes('No STEM Club profile exists for this sign-in.'), 'a missing profile must produce an actionable error');
+const passportPage = fs.readFileSync('my-passport/index.html', 'utf8');
+assert.ok(passportPage.includes('data-admin-access'), 'Passport must expose teacher tools after the database confirms admin access');
+assert.ok(passportPage.includes('data-passport-point-bank'), 'Passport must expose the teacher reward-bank balance');
 
 const htmlFiles = fs.readdirSync('.', {recursive: true})
   .filter(name => name.endsWith('.html'));
@@ -56,6 +63,35 @@ for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
   assert.ok((html.match(/<!doctype html>/gi) || []).length <= 1, `${file} contains concatenated documents`);
   assert.ok((html.match(/<main\b/gi) || []).length <= 1, `${file} contains duplicated main page content`);
+  const configPosition = html.indexOf('/portal-config.js?v=20260829-workspace-1');
+  const portalPosition = html.indexOf('/portal.js?v=20260829-workspace-1');
+  if (portalPosition !== -1) assert.ok(configPosition !== -1 && configPosition < portalPosition, `${file} must load the versioned config before portal.js`);
 }
 const functionNames = [...portal.matchAll(/^\s*(?:async\s+)?function\s+([\w$]+)\s*\(/gm)].map(match => match[1]);
 assert.equal(new Set(functionNames).size, functionNames.length, 'portal.js contains duplicate function declarations');
+
+const requiredAdminRoutes = ['admin', 'admin/badges', 'admin/learning', 'admin/events', 'admin/points'];
+for (const route of requiredAdminRoutes) assert.ok(fs.existsSync(`${route}/index.html`), `/${route} must be present in the static publish output`);
+assert.ok(migrations.includes("where role = 'admin' and account_status = 'active'"), 'point banks must be seeded from active database administrators');
+assert.match(migrations, /values\s*\(\s*'project-media',\s*'project-media',\s*false/, 'project-media must remain private');
+
+const adminFiles = fs.readdirSync('admin', {withFileTypes:true}).filter(entry => entry.isDirectory()).map(entry => `admin/${entry.name}/index.html`).filter(fs.existsSync);
+for (const file of adminFiles) {
+  const html=fs.readFileSync(file,'utf8');
+  assert.ok(html.includes('/portal-ux.js?v=20260829-workspace-1'), `${file} must load the unified workspace`);
+}
+assert.ok(portalUx.includes("localStorage.setItem('stem-language'"), 'language preference must persist');
+assert.ok(portalUx.includes("Html5Qrcode.getCameras()"), 'scanner must enumerate cameras');
+assert.ok(portalUx.includes("addEventListener('pagehide',stop"), 'scanner must clean up camera access');
+assert.ok(portalUx.includes("client.rpc('admin_manual_check_in'"), 'manual check-in must use a secure RPC');
+assert.ok(portalUx.includes("client.rpc('admin_award_points_contextual'"), 'selected-member awards must use the atomic bank RPC');
+assert.ok(portalUx.includes("crypto.randomUUID()"), 'point submissions must have an idempotency key');
+assert.ok(portalUx.includes("admin_update_recognition"), 'recognition response and visibility workflow must be wired');
+assert.ok(portalUx.includes("respond_to_feedback"), 'member feedback response workflow must be wired');
+assert.ok(portalUx.includes("data-notification-count"), 'notification bell must expose unread counts');
+assert.ok(portalUx.includes("data-tour-back"), 'guided tours must support Back');
+const learning=fs.readFileSync('admin/learning/index.html','utf8');
+assert.ok(learning.includes('class="choice-control"'), 'Publish now must use the compact accessible checkbox control');
+const migration5=fs.readFileSync('supabase/migrations/202608290005_workspace_workflows.sql','utf8');
+for (const table of ['notifications','feedback_requests']) assert.ok(migration5.includes(`create table if not exists public.${table}`));
+assert.ok(migration5.includes("if not public.is_admin() then raise exception 'Administrator access required'"), 'new administrator workflows must enforce database authorization');
