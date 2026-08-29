@@ -55,6 +55,7 @@ const htmlFiles = fs.readdirSync('.', {recursive: true})
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, 'utf8');
   assert.ok((html.match(/<!doctype html>/gi) || []).length <= 1, `${file} contains concatenated documents`);
+  assert.ok((html.match(/<main\b/gi) || []).length <= 1, `${file} contains duplicated main page content`);
 }
 const functionNames = [...portal.matchAll(/^\s*(?:async\s+)?function\s+([\w$]+)\s*\(/gm)].map(match => match[1]);
 assert.equal(new Set(functionNames).size, functionNames.length, 'portal.js contains duplicate function declarations');
