@@ -2,6 +2,8 @@
 const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const schema = fs.readFileSync('supabase/schema.sql', 'utf8');
+const migrations = fs.readdirSync('supabase/migrations').map(file => fs.readFileSync(`supabase/migrations/${file}`, 'utf8')).join('\n');
+const databaseSql = `${schema}\n${migrations}`;
 const portal = fs.readFileSync('portal.js', 'utf8');
 const tables = [
   'profiles','memberships','events','attendance','point_transactions','badges',
@@ -19,7 +21,7 @@ for (const table of [...portal.matchAll(/\.from\('([^']+)'\)/g)].map(m => m[1]).
   assert.ok(tables.includes(table), `portal table ${table} is missing`);
 }
 for (const rpc of [...portal.matchAll(/\.rpc\('([^']+)'/g)].map(m => m[1])) {
-  assert.ok(schema.includes(`function public.${rpc}(`), `portal RPC ${rpc} is missing`);
+  assert.ok(databaseSql.includes(`function public.${rpc}(`), `portal RPC ${rpc} is missing`);
 }
 assert.ok(schema.includes("default ('TSC-' || lpad(nextval('public.membership_number_seq')::text, 4, '0'))"));
 assert.ok(schema.includes("notify pgrst, 'reload schema';"));

@@ -22,47 +22,17 @@
     </ul>
   </nav>
 
-  <main class="checkout-page" id="payment">
-    <section class="checkout-campaign-card">
-      <div class="checkout-campaign-heading">
-        <p class="section-kicker section-kicker-blue">Our Campaign</p>
-        <h1>Complete your support for <span>STEM access.</span></h1>
-        <p>Choose a giving amount or use your cart total. Then share your contact details so we can follow up before you continue to PayPal.</p>
-      </div>
-
-      <div class="campaign-progress" aria-label="Campaign progress toward $5,000 goal">
-        <div class="campaign-progress-label"><span>$750 donated</span><span>$5,000 goal</span></div>
-        <div class="campaign-bar"><span style="width: 20%"></span></div>
-      </div>
-      <div class="campaign-amounts" data-donation-amounts>
-        <button type="button" data-amount="25">$25</button>
-        <button type="button" data-amount="50">$50</button>
-        <button type="button" data-amount="75">$75</button>
-        <button type="button" data-amount="100">$100</button>
-      </div>
-      <input class="campaign-custom" type="number" min="1" step="1" placeholder="Custom..." data-donation-custom data-payment-amount />
-    </section>
-
-    <section class="checkout-contact-card">
-      <h2>Contact Information</h2>
-      <form class="payment-form checkout-contact-form" data-paypal-form>
-        <input type="hidden" name="item_name" value="The STEM Club support"/>
-        <input type="hidden" name="amount" data-paypal-amount />
-        <div class="vf-row">
-          <label>First Name *<input type="text" name="first_name" required/></label>
-          <label>Last Name *<input type="text" name="last_name" required/></label>
-        </div>
-        <div class="vf-row">
-          <label>Email *<input type="email" name="email" required/></label>
-          <label>Phone<input type="tel" name="phone"/></label>
-        </div>
-        <label>Address<input type="text" name="address" placeholder="Street address"/></label>
-        <div class="vf-row">
-          <label>City<input type="text" name="city"/></label>
-          <label>State / ZIP<input type="text" name="state_zip"/></label>
-        </div>
-        <label>Notes<textarea name="notes" placeholder="Tell us if this is for a donation, shop order, sponsorship, or another purpose."></textarea></label>
-        <button type="submit" class="paypal-btn">Donate with PayPal</button>
+  <main class="donate-page" id="payment">
+    <header class="donate-header"><p class="section-kicker">Support The STEM Club</p><h1>Help make hands-on STEM possible.</h1><p>Choose an amount. You will continue to PayPal to complete your donation securely.</p></header>
+    <section class="donate-card">
+      <h2>Make a donation</h2>
+      <p class="donate-purpose">Your support helps provide workshop materials, robotics equipment, student projects, and outreach events.</p>
+      <form class="payment-form simple-donation-form" data-paypal-form>
+        <input type="hidden" name="amount" data-paypal-amount>
+        <fieldset><legend>Select an amount</legend><div class="campaign-amounts" data-donation-amounts><button type="button" data-amount="25">$25</button><button type="button" data-amount="50">$50</button><button type="button" data-amount="75">$75</button><button type="button" data-amount="100">$100</button></div></fieldset>
+        <label>Or enter another amount ($)<input class="campaign-custom" type="number" min="1" step="1" inputmode="decimal" data-donation-custom data-payment-amount required></label>
+        <button type="submit" class="paypal-btn">Continue to PayPal</button>
+        <p class="portal-note">PayPal opens in a new tab. No payment details are stored on this website.</p>
       </form>
     </section>
   </main>

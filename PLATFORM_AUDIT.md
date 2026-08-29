@@ -61,3 +61,8 @@ bucket and public-read `badge-assets` bucket with MIME limits, ownership rules,
 administrator-only badge writes, and approved-project signed-read policies. Do
 not manually make `project-media` public. The portal generates unique filenames;
 no service-role key is used in the browser.
+
+Run `supabase/migrations/202608290002_admin_point_bank.sql` next. It creates an
+RLS-enabled 10,000-point teacher reward bank and a database-authorized atomic
+award function. Only an active `admin` can read their bank or issue rewards;
+the debit and member ledger entry succeed or fail together.

@@ -18,7 +18,7 @@ for (const file of publicPages) {
 const home = fs.readFileSync('index.html', 'utf8');
 const support = fs.readFileSync('support.html', 'utf8');
 const main = fs.readFileSync('main.js', 'utf8');
-assert.ok(home.includes('class="home-facts"'), 'homepage must expose truthful at-a-glance facts');
+assert.ok(home.includes('Values & a clear path into STEM'), 'homepage must merge its values and pathway facts');
 assert.ok(home.includes('data-mailto-form'), 'homepage inquiry form must have a real action');
 assert.ok(support.includes('data-mailto-form'), 'volunteer form must have a real action');
 assert.ok(main.includes("form.matches('[data-mailto-form]')"), 'mailto forms must be handled');

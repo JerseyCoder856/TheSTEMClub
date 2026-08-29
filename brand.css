@@ -645,3 +645,48 @@ main.portal-shell:has(> .admin-nav) > :not(.admin-nav) { grid-column: 2; }
   .admin-nav::before { display: none; }
   .admin-nav a { width: auto; white-space: nowrap; }
 }
+
+/* Final homepage, donation, and reward-bank refinements. */
+.home-hero { background: linear-gradient(90deg,rgba(41,171,226,.62) 0 38%,rgba(41,171,226,.18) 68%,transparent 88%),url("A.png") center/cover no-repeat; }
+.home-hero-left { background: rgba(41,171,226,.12); }
+.home-hero-left h1,.home-hero-left .hero-subtitle,.change-world-tag { color: #fff; text-shadow: 0 2px 14px rgba(20,45,60,.42); }
+.portal-hero h1,.portal-hero p,.portal-kicker { color: #fff; }
+
+.workshop-card,.workshop-card:nth-child(2),.workshop-card:nth-child(3) { grid-template-columns: 1fr 1fr; min-height: 480px; }
+.workshop-card:nth-child(2) .ws-img,.workshop-card:nth-child(3) .ws-img { order: 0; }
+.workshop-card .ws-body { min-width: 0; }
+.support-work-banner { background: var(--brand-blue); }
+.support-work-banner .sw-text h2,.support-work-banner .sw-text p { color: #fff; }
+
+.contact-section { background: #f0faff; }
+.contact-layout { grid-template-columns: .82fr 1.18fr; width: min(1120px,calc(100% - 40px)); align-items: stretch; }
+.contact-intro { order: -1; padding: clamp(38px,6vw,72px); color: #fff; background: var(--brand-blue); border-left: 12px solid var(--brand-yellow); }
+.contact-intro .section-kicker,.contact-intro h3,.contact-intro p { color: #fff; }
+.contact-intro h3 { margin: 18px 0; font-size: clamp(2.2rem,4vw,4rem); line-height: 1; }
+.contact-intro p { line-height: 1.75; }
+.contact-intro ul { display: grid; gap: 13px; margin-top: 30px; }
+.contact-intro li { padding-top: 13px; border-top: 1px solid rgba(255,255,255,.45); font-weight: 800; }
+.contact-form-card { margin: 0; max-width: none; border-radius: 0; box-shadow: none; }
+
+.donate-page { width: min(760px,calc(100% - 36px)); margin: 0 auto; padding: clamp(54px,7vw,88px) 0; }
+.donate-header { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 6px solid var(--brand-blue); }
+.donate-header h1 { margin: 12px 0 16px; font-size: clamp(2.5rem,6vw,4.7rem); line-height: 1; }
+.donate-header > p:last-child { max-width: 620px; color: var(--text-soft); line-height: 1.7; }
+.donate-card { padding: clamp(28px,5vw,48px); background: #f6fbfe; border: 2px solid #9ebccc; }
+.donate-card h2 { font-size: 2rem; }
+.donate-purpose { margin: 10px 0 28px; color: var(--text-soft); line-height: 1.65; }
+.simple-donation-form { display: grid; gap: 22px; }
+.simple-donation-form fieldset { border: 0; }
+.simple-donation-form legend,.simple-donation-form label { display: grid; gap: 8px; margin-bottom: 10px; font-weight: 900; }
+.simple-donation-form .campaign-amounts { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.simple-donation-form .campaign-amounts button { min-height: 52px; border: 2px solid var(--brand-blue); background: #fff; font-weight: 900; cursor: pointer; }
+.simple-donation-form .campaign-amounts button.is-selected { color: #fff; background: var(--brand-blue); }
+.simple-donation-form .paypal-btn { min-height: 56px; border: 0; background: var(--brand-red); color: #fff; font-size: 1.05rem; font-weight: 900; cursor: pointer; }
+.point-bank { display: block; margin: 12px 0; color: #0879ad; }
+.point-bank b { font-size: 2.5rem; }
+
+@media(max-width:800px){
+ .contact-layout { grid-template-columns: 1fr; }
+ .workshop-card,.workshop-card:nth-child(2),.workshop-card:nth-child(3) { grid-template-columns: 1fr; }
+ .simple-donation-form .campaign-amounts { grid-template-columns: repeat(2,1fr); }
+}
