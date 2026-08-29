@@ -112,6 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form.classList.contains('payment-form')) return;
     form.addEventListener('submit', e => {
       e.preventDefault();
+      if (form.matches('[data-mailto-form]')) {
+        const data = new FormData(form);
+        const recipient = form.dataset.recipient;
+        const name = `${data.get('firstName') || ''} ${data.get('lastName') || ''}`.trim();
+        const subject = encodeURIComponent(`Website inquiry from ${name || 'a STEM Club visitor'}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${data.get('email') || ''}\n\n${data.get('message') || ''}`);
+        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+        return;
+      }
       const btn = form.querySelector('button[type="submit"]');
       if (!btn) return;
       const orig = btn.textContent;

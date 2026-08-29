@@ -11,11 +11,13 @@
 <body>
   <nav class="navbar">
     <a href="/" class="logo"><img src="/m.png" alt="The STEM Club"></a>
-    <ul class="nav-links">
+    <ul class="nav-links" aria-label="Primary navigation">
       <li><a href="/">Home</a></li>
-      <li><a href="/blog.html">Blog</a></li>
-      <li><a href="/support.html">Support Us</a></li>
-      <li><a href="/checkout.html" class="btn-donate">DONATE</a></li>
+      <li class="nav-dropdown"><a href="/#workshops" aria-haspopup="true">Programs <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Programs"><a href="/#workshops">Mechanical</a><a href="/#workshops">Electrical</a><a href="/#workshops">Computer Science</a><a href="/#workshops">Robotics Campaign</a></div></li>
+      <li><a href="/#about">About</a></li>
+      <li class="nav-dropdown"><a href="/support.html" aria-haspopup="true">Get Involved <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Get involved"><a href="/support.html#volunteer">Volunteer</a><a href="/support.html">Partner with us</a><a href="/support.html#shop">Shop to support</a></div></li>
+      <li><a href="/checkout.html" class="btn-donate">Donate</a></li>
+      <li><a href="/login" class="member-access-link" data-member-access>Member Login</a></li>
     </ul>
   </nav>
   <main class="portal-shell">
@@ -23,12 +25,13 @@
       <p class="section-kicker">Member access</p>
       <h1>Choose a new password</h1>
       <p class="portal-note">Enter and confirm your new password.</p>
-      <form class="portal-form" data-auth="reset-password">
+      <form class="portal-form" data-auth="reset-password" aria-describedby="recovery-status">
         <label>New password<input name="password" type="password" autocomplete="new-password" minlength="8" required></label>
         <label>Confirm new password<input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required></label>
-        <button class="btn-pill-green" type="submit">Update Password</button>
+        <button class="btn-pill-green" type="submit" disabled data-recovery-submit>Update Password</button>
       </form>
-      <p class="portal-message" data-portal-message aria-live="polite"></p>
+      <p id="recovery-status" class="portal-message" data-portal-message aria-live="polite">Verifying your secure recovery link…</p>
+      <p class="portal-note" data-recovery-again hidden><a class="btn-pill-outline-dark" href="/forgot-password">Request a new recovery link</a></p>
       <p class="portal-note"><a href="/login">Back to Log In</a></p>
     </section>
   </main>
