@@ -692,3 +692,6 @@ main.portal-shell:has(> .admin-nav) > :not(.admin-nav) { grid-column: 2; }
 }
 .profile-avatar-photo { width: 76px; height: 76px; flex: 0 0 76px; object-fit: cover; border: 3px solid var(--brand-blue); }
 [data-event-registration] { margin-top: 18px; }
+.admin-entry { display: inline-flex; margin-top: 22px; padding: 12px 18px; background: #fff; color: #0879ad; font-weight: 900; border: 2px solid #fff; }
+.admin-entry[hidden],[data-admin-access][hidden] { display: none !important; }
+.teacher-bank-card { border-top: 8px solid var(--brand-yellow) !important; }
