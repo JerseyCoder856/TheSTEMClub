@@ -23,12 +23,13 @@
       <p class="section-kicker">Member access</p>
       <h1>Choose a new password</h1>
       <p class="portal-note">Enter and confirm your new password.</p>
-      <form class="portal-form" data-auth="reset-password">
+      <form class="portal-form" data-auth="reset-password" aria-describedby="recovery-status">
         <label>New password<input name="password" type="password" autocomplete="new-password" minlength="8" required></label>
         <label>Confirm new password<input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required></label>
-        <button class="btn-pill-green" type="submit">Update Password</button>
+        <button class="btn-pill-green" type="submit" disabled data-recovery-submit>Update Password</button>
       </form>
-      <p class="portal-message" data-portal-message aria-live="polite"></p>
+      <p id="recovery-status" class="portal-message" data-portal-message aria-live="polite">Verifying your secure recovery link…</p>
+      <p class="portal-note" data-recovery-again hidden><a class="btn-pill-outline-dark" href="/forgot-password">Request a new recovery link</a></p>
       <p class="portal-note"><a href="/login">Back to Log In</a></p>
     </section>
   </main>

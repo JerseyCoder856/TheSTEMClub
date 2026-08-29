@@ -38,4 +38,17 @@ assert.equal(
 assert.ok(!/resetPasswordForEmail[^\n]*localhost/.test(portal), 'password recovery must not use localhost');
 assert.ok(resetPage.includes('data-auth="reset-password"'), 'reset page must provide the password form');
 assert.ok(portal.includes('client.auth.updateUser({password})'), 'reset form must update the Supabase user');
-assert.ok(portal.includes("location.assign('/login')"), 'successful password reset must return to login');
+assert.ok(portal.includes("client.auth.exchangeCodeForSession(query.get('code'))"), 'PKCE recovery codes must be exchanged');
+assert.ok(portal.includes("client.auth.setSession({access_token:hash.get('access_token'),refresh_token:hash.get('refresh_token')})"), 'hash recovery tokens must establish a session');
+assert.ok(portal.includes("event==='PASSWORD_RECOVERY'"), 'recovery must wait for the PASSWORD_RECOVERY event');
+assert.ok(portal.includes("location.assign('/login?password-reset=success')"), 'successful password reset must return to login with confirmation state');
+assert.ok(resetPage.includes('disabled data-recovery-submit'), 'reset submit must start disabled');
+
+const htmlFiles = fs.readdirSync('.', {recursive: true})
+  .filter(name => name.endsWith('.html'));
+for (const file of htmlFiles) {
+  const html = fs.readFileSync(file, 'utf8');
+  assert.ok((html.match(/<!doctype html>/gi) || []).length <= 1, `${file} contains concatenated documents`);
+}
+const functionNames = [...portal.matchAll(/^\s*(?:async\s+)?function\s+([\w$]+)\s*\(/gm)].map(match => match[1]);
+assert.equal(new Set(functionNames).size, functionNames.length, 'portal.js contains duplicate function declarations');
