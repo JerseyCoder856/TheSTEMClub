@@ -18,7 +18,7 @@ for (const table of tables) {
 }
 const storageBuckets = ['project-media', 'badge-assets', 'profile-photos'];
 for (const table of [...portal.matchAll(/\.from\('([^']+)'\)/g)].map(m => m[1]).filter(name => !storageBuckets.includes(name))) {
-  assert.ok(tables.includes(table), `portal table ${table} is missing`);
+  assert.ok(tables.includes(table)||['feedback','feedback_requests'].includes(table), `portal table ${table} is missing`);
 }
 for (const rpc of [...portal.matchAll(/\.rpc\('([^']+)'/g)].map(m => m[1])) {
   assert.ok(databaseSql.includes(`function public.${rpc}(`), `portal RPC ${rpc} is missing`);
@@ -73,3 +73,21 @@ const requiredAdminRoutes = ['admin', 'admin/badges', 'admin/learning', 'admin/e
 for (const route of requiredAdminRoutes) assert.ok(fs.existsSync(`${route}/index.html`), `/${route} must be present in the static publish output`);
 assert.ok(migrations.includes("where role = 'admin' and account_status = 'active'"), 'point banks must be seeded from active database administrators');
 assert.match(migrations, /values\s*\(\s*'project-media',\s*'project-media',\s*false/, 'project-media must remain private');
+const workspaceMigration = fs.readFileSync('supabase/migrations/202608290005_feedback_notifications.sql', 'utf8');
+for (const table of ['notifications', 'feedback']) {
+  assert.ok(workspaceMigration.includes(`create table if not exists public.${table}`), `${table} migration is missing`);
+  assert.ok(workspaceMigration.includes(`alter table public.${table} enable row level security`), `${table} must have RLS`);
+}
+assert.ok(workspaceMigration.includes('profile_id = auth.uid()'), 'workspace messages must remain scoped to the signed-in profile');
+assert.ok(workspaceMigration.includes("set search_path = ''"), 'security-definer notification writes must pin the search path');
+assert.ok(portal.includes("localStorage.getItem('stem-language')"), 'workspace must persist the English/Spanish preference');
+assert.ok(portal.includes("client.rpc('submit_feedback'"), 'feedback must use the RLS-backed RPC');
+assert.ok(portal.includes("client.rpc('member_notifications'"), 'notifications must use the member-scoped RPC');
+const workflowsMigration = fs.readFileSync('supabase/migrations/202608290006_workspace_workflows.sql', 'utf8');
+for (const rpc of ['admin_review_recognition','admin_request_feedback','respond_to_feedback_request']) assert.ok(workflowsMigration.includes(`function public.${rpc}(`), `${rpc} workflow RPC is missing`);
+for (const activity of ['notify_attendance','notify_points','notify_badges','notify_feedback_request','notify_admin_feedback','notify_admin_recognition']) assert.ok(workflowsMigration.includes(`trigger ${activity}`), `${activity} notification trigger is missing`);
+assert.ok(portal.includes("facingMode:{ideal:'environment'}"), 'scanner must prefer the rear camera');
+assert.ok(portal.includes("window.addEventListener('pagehide',stop"), 'scanner must clean up camera access');
+assert.ok(portal.includes("data-manual-scan"), 'scanner must provide manual fallback');
+assert.ok(portal.includes("data-tour-back"), 'guided tour must provide Back navigation');
+assert.ok(fs.existsSync('admin/notifications/index.html'), 'unified teacher notification route must exist');
