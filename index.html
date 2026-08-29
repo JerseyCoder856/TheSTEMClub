@@ -18,11 +18,26 @@
 
 
    
-    <ul class="nav-links">
+    <ul class="nav-links" aria-label="Primary navigation">
       <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="index.html#workshops">Programs</a></li>
+      <li class="nav-dropdown">
+        <a href="index.html#workshops" aria-haspopup="true">Programs <span aria-hidden="true">⌄</span></a>
+        <div class="nav-dropdown-menu" aria-label="Programs">
+          <a href="#workshops">Mechanical</a>
+          <a href="#workshops">Electrical</a>
+          <a href="#workshops">Computer Science</a>
+          <a href="#workshops">Robotics Campaign</a>
+        </div>
+      </li>
       <li><a href="index.html#about">About</a></li>
-      <li><a href="support.html">Get Involved</a></li>
+      <li class="nav-dropdown">
+        <a href="support.html" aria-haspopup="true">Get Involved <span aria-hidden="true">⌄</span></a>
+        <div class="nav-dropdown-menu" aria-label="Get involved">
+          <a href="support.html#volunteer">Volunteer</a>
+          <a href="support.html">Partner with us</a>
+          <a href="support.html#shop">Shop to support</a>
+        </div>
+      </li>
       <li><a href="checkout.html" class="btn-donate">Donate</a></li>
       <li><a href="login" class="member-access-link" data-member-access>Member Login</a></li>
     </ul>
@@ -31,6 +46,7 @@
   <!-- HERO — split red left / blue right -->
   <section class="home-hero">
     <div class="home-hero-left">
+      <p class="change-world-tag">Curiosity becomes capability here.</p>
       <h1>Building bright futures through STEM.</h1>
       <p class="hero-subtitle">The STEM Club creates welcoming workshops, mentorship, and community projects that help students discover science, technology, engineering, and math with confidence.</p>
       <div class="hero-btns">
@@ -40,16 +56,18 @@
     </div>
     <div class="home-hero-right">
       <div class="hero-video-thumb">
-        <img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=500&q=80" alt="STEM Workshop"/>
-        <div class="play-btn">
-          <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="30" fill="rgba(255,255,255,0.25)"/><polygon points="24,18 46,30 24,42" fill="#fff"/></svg>
-        </div>
+        <img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=1400&q=88" alt="Hands-on STEM workshop equipment"/>
+        <p class="hero-photo-label"><strong>Explore. Build. Belong.</strong><span>Practical STEM experiences with room to grow.</span></p>
       </div>
     </div>
   </section>
 
   <!-- MISSION / VISION / VALUES cards -->
   <section class="mvv-section">
+    <div class="section-intro section-intro--center">
+      <p class="section-kicker">Our foundation</p>
+      <h2>Big ideas need a place to begin.</h2>
+    </div>
     <div class="mvv-grid">
       <!-- Mission — blue -->
       <div class="mvv-card mvv-blue">
@@ -86,7 +104,7 @@
         <h2 class="about-title">A student-centered nonprofit for hands-on <span class="stem-colored">STEM</span> discovery</h2>
         <div class="about-photos">
           <img src="https://i.imgur.com/lbb46Tb.jpeg" alt="STEM 1" class="about-photo border-red"/>
-          <img src="https://i.imgur.com/FaX9wHi.jpeg" class="about-photo border-green"/>
+          <img src="https://i.imgur.com/FaX9wHi.jpeg" alt="Students collaborating during a STEM activity" class="about-photo border-green"/>
           <img src="https://i.imgur.com/XC62kBT.jpeg" alt="STEM 3" class="about-photo border-blue"/>
           <img src="https://i.imgur.com/EGZzQyi.jpeg" alt="STEM 4" class="about-photo border-yellow"/>
         </div>
@@ -109,7 +127,7 @@
   <section class="workshops-section" id="workshops">
     <div class="workshops-title-deco">
       <div class="dash yellow-dash"></div>
-      <h2>Workshops</h2>
+      <div><p class="section-kicker">Choose a pathway</p><h2>Workshops</h2></div>
       <div class="dash yellow-dash"></div>
     </div>
     <div class="workshop-cards">

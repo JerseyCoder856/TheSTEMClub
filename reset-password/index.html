@@ -11,11 +11,13 @@
 <body>
   <nav class="navbar">
     <a href="/" class="logo"><img src="/m.png" alt="The STEM Club"></a>
-    <ul class="nav-links">
+    <ul class="nav-links" aria-label="Primary navigation">
       <li><a href="/">Home</a></li>
-      <li><a href="/blog.html">Blog</a></li>
-      <li><a href="/support.html">Support Us</a></li>
-      <li><a href="/checkout.html" class="btn-donate">DONATE</a></li>
+      <li class="nav-dropdown"><a href="/#workshops" aria-haspopup="true">Programs <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Programs"><a href="/#workshops">Mechanical</a><a href="/#workshops">Electrical</a><a href="/#workshops">Computer Science</a><a href="/#workshops">Robotics Campaign</a></div></li>
+      <li><a href="/#about">About</a></li>
+      <li class="nav-dropdown"><a href="/support.html" aria-haspopup="true">Get Involved <span aria-hidden="true">⌄</span></a><div class="nav-dropdown-menu" aria-label="Get involved"><a href="/support.html#volunteer">Volunteer</a><a href="/support.html">Partner with us</a><a href="/support.html#shop">Shop to support</a></div></li>
+      <li><a href="/checkout.html" class="btn-donate">Donate</a></li>
+      <li><a href="/login" class="member-access-link" data-member-access>Member Login</a></li>
     </ul>
   </nav>
   <main class="portal-shell">

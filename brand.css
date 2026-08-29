@@ -273,3 +273,226 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+/* ================================================================
+   Expansive bright-blue layout — homepage and public-site restructure
+   ================================================================ */
+.section-intro { width: min(760px,calc(100% - 40px)); margin: 0 auto 48px; }
+.section-intro--center { text-align: center; }
+.section-intro h2 { margin-top: 12px; font-size: clamp(2.5rem,5vw,4.7rem); line-height: 1; }
+
+/* Dropdown navigation is keyboard-operable through focus-within. */
+.nav-dropdown { position: relative; }
+.nav-dropdown > a { display: flex !important; align-items: center; gap: 7px; }
+.nav-dropdown > a span { color: var(--brand-blue); font-size: 1rem; transition: transform .2s ease; }
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  z-index: 20;
+  width: 230px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid rgba(11,47,77,.12);
+  border-radius: 18px;
+  box-shadow: 0 22px 55px rgba(7,31,51,.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%,-8px);
+  transition: opacity .2s ease,transform .2s ease,visibility .2s;
+}
+.nav-dropdown-menu a {
+  display: block !important;
+  padding: 12px 14px !important;
+  border-radius: 11px;
+  color: var(--navy-900) !important;
+  font-size: .86rem;
+}
+.nav-dropdown-menu a::after { display: none !important; }
+.nav-dropdown-menu a:hover,.nav-dropdown-menu a:focus-visible { background: #e9f8ff; color: var(--navy-800) !important; }
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translate(-50%,0); }
+.nav-dropdown:hover > a span,.nav-dropdown:focus-within > a span { transform: rotate(180deg); }
+
+/* An unexpected editorial split: bright blue content field + giant photo card. */
+.home-hero {
+  min-height: calc(100vh - 84px);
+  padding: clamp(18px,2.5vw,36px);
+  grid-template-columns: minmax(0,.9fr) minmax(420px,1.1fr);
+  gap: clamp(18px,2.2vw,34px);
+  background: #eaf8ff;
+  overflow: hidden;
+}
+.home-hero::before { display: none; }
+.home-hero::after {
+  width: 260px;
+  height: 260px;
+  right: auto;
+  left: -125px;
+  bottom: -130px;
+  border: 42px solid rgba(255,255,255,.22);
+  z-index: 1;
+}
+.home-hero-left {
+  min-height: 650px;
+  padding: clamp(56px,7vw,108px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 38px;
+  background: var(--brand-blue);
+  position: relative;
+  overflow: hidden;
+}
+.home-hero-left::before {
+  content: "";
+  position: absolute;
+  right: -75px;
+  top: -70px;
+  width: 245px;
+  height: 245px;
+  border-radius: 50%;
+  background: var(--brand-yellow);
+  opacity: .96;
+}
+.home-hero-left::after {
+  content: "";
+  position: absolute;
+  right: 48px;
+  bottom: 42px;
+  width: 28px;
+  height: 82px;
+  background: var(--brand-red);
+  box-shadow: 38px 0 0 var(--brand-green),76px 0 0 var(--brand-yellow);
+  border-radius: 99px;
+}
+.change-world-tag {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 24px;
+  padding: 9px 15px;
+  background: rgba(255,255,255,.17);
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 999px;
+  color: #fff;
+  font-size: .78rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.home-hero-left h1 {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  font-size: clamp(3.45rem,6.2vw,7rem);
+  color: #fff;
+}
+.home-hero-left .hero-subtitle { position: relative; z-index: 2; color: rgba(255,255,255,.9); font-weight: 600; }
+.home-hero .hero-btns { position: relative; z-index: 2; }
+.home-hero-right { min-height: 650px; }
+.home-hero .hero-video-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 650px;
+  border-radius: 38px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+.home-hero .hero-video-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,transparent 52%,rgba(7,31,51,.72));
+}
+.home-hero .hero-video-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.hero-photo-label {
+  position: absolute;
+  left: clamp(24px,4vw,54px);
+  right: 24px;
+  bottom: clamp(24px,4vw,48px);
+  z-index: 2;
+  color: #fff;
+}
+.hero-photo-label strong { display: block; font-size: clamp(1.7rem,3vw,3.1rem); letter-spacing: -.04em; }
+.hero-photo-label span { display: block; margin-top: 6px; color: rgba(255,255,255,.8); }
+
+/* Mission cards bridge the hero and the story instead of forming a generic row. */
+.mvv-section { padding: clamp(90px,10vw,150px) 0; background: #fff; }
+.mvv-grid { max-width: 1320px; grid-template-columns: 1.08fr .84fr 1.08fr; gap: 24px; align-items: center; }
+.mvv-card { min-height: 340px; padding: clamp(32px,4vw,54px); justify-content: center; border: 0; border-radius: 34px; }
+.mvv-card:nth-child(2) { min-height: 430px; background: var(--navy-900); transform: translateY(24px); }
+.mvv-card:nth-child(2) h3,.mvv-card:nth-child(2) p { color: #fff; }
+.mvv-card:nth-child(1) { background: #eefaff; }
+.mvv-card:nth-child(3) { background: #fff8da; }
+.mvv-icon { width: 92px; height: 92px; }
+
+/* Large photographic story wall occupies the viewport instead of a small collage. */
+.about-section { padding: clamp(90px,10vw,150px) 0; background: var(--navy-950); overflow: hidden; }
+.about-inner { width: min(1380px,calc(100% - 48px)); max-width: none; grid-template-columns: 1.25fr .75fr; gap: clamp(36px,6vw,90px); }
+.about-title,.about-right .about-who-title { color: #fff; }
+.about-eyebrow { color: var(--brand-yellow); }
+.about-body { color: rgba(255,255,255,.72); font-size: 1.06rem; }
+.about-checks { color: #fff; }
+.about-checks .sep { color: rgba(255,255,255,.24); }
+.about-photos { grid-template-columns: 1.35fr .65fr; grid-template-rows: 310px 310px; gap: 16px; }
+.about-photo { border-radius: 28px; box-shadow: none; transform: none !important; }
+.about-photo:nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
+.about-photo:nth-child(2) { grid-column: 2; grid-row: 1; }
+.about-photo:nth-child(3) { grid-column: 2; grid-row: 2; }
+.about-photo:nth-child(4) { display: none; }
+.about-right { align-self: center; padding: 0; }
+.about-who-title { margin-bottom: 20px; font-size: .84rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; }
+
+/* Programs become an expansive two-column magazine layout with large imagery. */
+.workshops-section { padding: clamp(90px,10vw,150px) 0; }
+.workshops-title-deco { margin-bottom: 58px; }
+.workshops-title-deco > div:not(.dash) { text-align: center; }
+.workshops-title-deco .section-kicker { margin-bottom: 10px; }
+.workshop-cards { width: min(1400px,calc(100% - 48px)); max-width: none; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px; }
+.workshop-card { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 440px; border-radius: 32px; }
+.workshop-card:nth-child(2),.workshop-card:nth-child(3) { grid-template-columns: .92fr 1.08fr; }
+.workshop-card:nth-child(2) .ws-img,.workshop-card:nth-child(3) .ws-img { order: 2; }
+.ws-img { height: 100%; aspect-ratio: auto; }
+.ws-body { padding: clamp(28px,4vw,48px); border: 0; border-top: 8px solid var(--workshop-color); }
+.ws-body h3 { font-size: clamp(2rem,3vw,3rem); }
+
+.contact-section { padding-block: clamp(100px,10vw,150px); }
+.contact-layout { width: min(1380px,calc(100% - 48px)); max-width: none; grid-template-columns: 1fr 1.2fr; }
+.contact-map iframe { min-height: 600px; }
+.contact-form-card { display: flex; flex-direction: column; justify-content: center; }
+
+/* The remaining public route heroes share the bright blue identity. */
+.blog-hero,.support-hero,.checkout-hero { background: var(--brand-blue) !important; border: 0; }
+.blog-hero h1,.support-hero h1,.checkout-hero h1 { color: #fff; }
+
+@media (max-width: 1050px) {
+  .home-hero { grid-template-columns: 1fr; }
+  .home-hero-right { display: block; min-height: 520px; }
+  .home-hero .hero-video-thumb { min-height: 520px; }
+  .mvv-grid { grid-template-columns: 1fr; width: min(720px,calc(100% - 40px)); }
+  .mvv-card,.mvv-card:nth-child(2) { min-height: 0; transform: none; }
+  .about-inner { grid-template-columns: 1fr; }
+  .about-right { max-width: 720px; }
+  .workshop-card { grid-template-columns: 1fr !important; }
+  .workshop-card .ws-img { order: 0 !important; min-height: 340px; }
+}
+@media (max-width: 700px) {
+  .nav-dropdown-menu { display: none; }
+  .home-hero { min-height: 0; padding: 12px; gap: 12px; }
+  .home-hero-left { min-height: 600px; padding: 62px 24px 80px; border-radius: 28px; }
+  .home-hero-left::before { width: 170px; height: 170px; }
+  .home-hero-left::after { right: 30px; bottom: 24px; height: 48px; }
+  .home-hero-right,.home-hero .hero-video-thumb { min-height: 430px; border-radius: 28px; }
+  .section-intro { margin-bottom: 34px; }
+  .about-inner,.workshop-cards,.contact-layout { width: min(100% - 28px,1400px); }
+  .about-photos { grid-template-columns: 1fr 1fr; grid-template-rows: 360px 210px; }
+  .about-photo:nth-child(1) { grid-column: 1 / 3; grid-row: 1; }
+  .about-photo:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .about-photo:nth-child(3) { grid-column: 2; grid-row: 2; }
+  .workshop-cards { grid-template-columns: 1fr; }
+  .workshop-card { min-height: 0; }
+  .workshop-card .ws-img { min-height: 300px; }
+  .contact-map iframe { min-height: 420px; }
+}
