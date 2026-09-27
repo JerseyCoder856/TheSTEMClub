@@ -695,3 +695,53 @@ main.portal-shell:has(> .admin-nav) > :not(.admin-nav) { grid-column: 2; }
 .admin-entry { display: inline-flex; margin-top: 22px; padding: 12px 18px; background: #fff; color: #0879ad; font-weight: 900; border: 2px solid #fff; }
 .admin-entry[hidden],[data-admin-access][hidden] { display: none !important; }
 .teacher-bank-card { border-top: 8px solid var(--brand-yellow) !important; }
+
+/* Shared classroom-poster finish across public and member pages. */
+body { background-color: #fffdf5; color: var(--poster-ink); }
+.navbar { border-bottom: 2px solid var(--poster-ink); box-shadow: none; backdrop-filter: none; }
+.mvv-card,.workshop-card,.contact-form-card,.contact-map,.product-card,.blog-card,.checkout-card,.portal-card {
+  border: 2px solid var(--poster-ink);
+  border-radius: 6px;
+  box-shadow: 4px 4px 0 rgba(16,16,16,.14);
+}
+.portal-side { border-top: 8px solid var(--poster-blue) !important; box-shadow: 4px 4px 0 rgba(16,16,16,.14); }
+.portal-side a { border-radius: 4px; }
+.portal-hero { border-radius: 6px; box-shadow: 6px 6px 0 var(--poster-ink); }
+.portal-hero h1,.portal-hero p { color: var(--poster-ink); }
+.portal-actions .btn-pill-red,.portal-actions .btn-pill-green,.portal-actions .btn-pill-yellow,.portal-actions .btn-pill-white {
+  border: 2px solid var(--poster-ink);
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 var(--poster-ink);
+}
+
+/* Keep the full home banner visible below the shared 84px navigation. */
+.home-hero {
+  height: min(820px,calc(100svh - 84px));
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+}
+.home-hero-left { min-height: 0; padding-block: clamp(24px,7vh,76px); }
+
+@media(max-width:900px) {
+  .home-hero { height: calc(100svh - 132px); min-height: 0; }
+  .home-hero-left { width: 100%; min-height: 0; padding: 28px; }
+}
+@media(max-width:700px) {
+  .navbar .nav-links { width: 100%; justify-content: center; }
+  .home-hero { height: calc(100svh - 184px); }
+}
+@media(max-width:400px) {
+  .home-hero { height: calc(100svh - 232px); }
+}
+@media(max-height:650px) {
+  .home-hero-left { padding-block: 14px; }
+  .home-hero-left h1 { font-size: 3rem; line-height: 1; margin-bottom: 12px; }
+  .home-hero-left .hero-subtitle { font-size: 1rem; line-height: 1.45; margin-bottom: 16px; }
+  .change-world-tag { margin-bottom: 8px; padding-block: 6px; }
+}
+@media(max-width:560px) {
+  .home-hero-left { padding: 18px; }
+  .home-hero-left h1 { font-size: 2.6rem; }
+  .home-hero-left .hero-subtitle { font-size: 1rem; }
+}

@@ -18,9 +18,12 @@ for (const file of publicPages) {
 const home = fs.readFileSync('index.html', 'utf8');
 const support = fs.readFileSync('support.html', 'utf8');
 const main = fs.readFileSync('main.js', 'utf8');
+const brand = fs.readFileSync('brand.css', 'utf8');
 assert.ok(home.includes('Values & a clear path into STEM'), 'homepage must merge its values and pathway facts');
 assert.ok(home.includes('data-mailto-form'), 'homepage inquiry form must have a real action');
 assert.ok(support.includes('data-mailto-form'), 'volunteer form must have a real action');
 assert.ok(main.includes("form.matches('[data-mailto-form]')"), 'mailto forms must be handled');
+assert.ok(brand.includes('height: min(820px,calc(100svh - 84px))'), 'homepage banner must fit below the shared navigation');
+assert.ok(brand.includes('@media(max-height:650px)'), 'homepage banner must compact for short viewports');
 assert.ok(!support.includes('Description coming soon.</p><button'), 'unavailable products must not have Add buttons');
 console.log(`Public UI contract OK: ${publicPages.length} pages checked.`);

@@ -55,6 +55,10 @@ assert.ok(portal.includes('No STEM Club profile exists for this sign-in.'), 'a m
 const passportPage = fs.readFileSync('my-passport/index.html', 'utf8');
 assert.ok(passportPage.includes('data-admin-access'), 'Passport must expose teacher tools after the database confirms admin access');
 assert.ok(passportPage.includes('data-passport-point-bank'), 'Passport must expose the teacher reward-bank balance');
+for (const route of ['my-card', 'member/education', 'member/community', 'member/events', 'member/achievements', 'member/membership', 'member/profile', 'member/settings']) {
+  assert.ok(passportPage.includes(`href="/${route}"`), `Passport must link to /${route}`);
+  assert.ok(fs.existsSync(`${route}/index.html`), `/${route} must be a published student destination`);
+}
 
 const htmlFiles = fs.readdirSync('.', {recursive: true})
   .filter(name => name.endsWith('.html'));
