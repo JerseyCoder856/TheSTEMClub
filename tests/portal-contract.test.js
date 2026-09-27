@@ -11,6 +11,11 @@ assert.ok(adminHome.includes('class="btn-pill-yellow open-student-account" href=
 assert.ok(portal.includes("path==='/my-passport'&&new URLSearchParams(location.search).get('view')==='student'"), 'student preview must be scoped to the Passport route');
 assert.ok(portal.includes("if(path==='/member'){location.replace('/my-passport');return}"), 'legacy member dashboard must route to the canonical Passport');
 assert.ok(portal.includes("dashboard.href='/my-passport'"), 'member navigation must return to the canonical Passport');
+for (const helper of ['function loadNotificationCount()', 'function notificationDialog()', 'function feedbackDialog()']) {
+  assert.ok(portal.includes(helper), `${helper} must be implemented for the workspace toolbar`);
+}
+assert.ok(portal.includes("client.rpc('member_notifications')"), 'notification UI must use the member-scoped notification RPC');
+assert.ok(portal.includes("client.rpc('mark_notifications_read',{notification_ids:unread})"), 'opening notifications must mark only returned unread rows as read');
 const tables = [
   'profiles','memberships','events','attendance','point_transactions','badges',
   'member_badges','audit_logs','event_registrations','courses','course_modules',
