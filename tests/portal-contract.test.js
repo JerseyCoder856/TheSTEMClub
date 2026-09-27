@@ -9,6 +9,8 @@ assert.ok(portal.includes("['/my-passport','My Passport']"), 'teacher workspace 
 const adminHome = fs.readFileSync('admin/index.html', 'utf8');
 assert.ok(adminHome.includes('class="btn-pill-yellow open-student-account" href="/my-passport?view=student">Open Student Account</a>'), 'admin overview must expose the student account preview');
 assert.ok(portal.includes("path==='/my-passport'&&new URLSearchParams(location.search).get('view')==='student'"), 'student preview must be scoped to the Passport route');
+assert.ok(portal.includes("if(path==='/member'){location.replace('/my-passport');return}"), 'legacy member dashboard must route to the canonical Passport');
+assert.ok(portal.includes("dashboard.href='/my-passport'"), 'member navigation must return to the canonical Passport');
 const tables = [
   'profiles','memberships','events','attendance','point_transactions','badges',
   'member_badges','audit_logs','event_registrations','courses','course_modules',

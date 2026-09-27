@@ -706,6 +706,7 @@ body { background-color: #fffdf5; color: var(--poster-ink); }
 }
 .portal-side { border-top: 8px solid var(--poster-blue) !important; box-shadow: 4px 4px 0 rgba(16,16,16,.14); }
 .portal-side a { border-radius: 4px; }
+.portal-side a[aria-current="page"] { background: var(--poster-yellow); border-left-color: var(--poster-blue); font-weight: 900; }
 .portal-hero { border-radius: 6px; box-shadow: 6px 6px 0 var(--poster-ink); }
 .portal-hero h1,.portal-hero p { color: var(--poster-ink); }
 .portal-actions .btn-pill-red,.portal-actions .btn-pill-green,.portal-actions .btn-pill-yellow,.portal-actions .btn-pill-white {
