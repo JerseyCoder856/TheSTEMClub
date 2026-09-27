@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>STEM Teams — The STEM Club</title>
+  <link rel="stylesheet" href="/shared.css">
+  <link rel="stylesheet" href="/portal.css">
+  <link rel="stylesheet" href="/brand.css">
+</head>
+<body>
+  <nav class="navbar"><a href="/" class="logo"><img src="/m.png" alt="The STEM Club"></a><ul class="nav-links"><li><a href="/my-passport">Home</a></li><li><button type="button" data-logout class="btn-pill-outline-dark">Log Out</button></li></ul></nav>
+  <main class="portal-shell">
+    <p class="portal-message" data-portal-message role="status" aria-live="polite"></p>
+    <section class="portal-hero"><p class="portal-kicker">The Club · Teams</p><h1>Find your people. Build together.</h1><p>Join an open STEM team or start one around an idea you care about.</p><button type="button" class="btn-pill-yellow" data-create-team>+ Create a Team</button></section>
+    <div class="student-filter-row" role="group" aria-label="Filter teams" data-team-filters><button type="button" data-team-filter="All STEM" aria-pressed="true">All STEM</button><button type="button" data-team-filter="Electronics" aria-pressed="false">Electronics</button><button type="button" data-team-filter="Programming" aria-pressed="false">Programming</button><button type="button" data-team-filter="3D Design" aria-pressed="false">3D Design</button><button type="button" data-team-filter="Environmentals" aria-pressed="false">Environmentals</button></div>
+    <section class="portal-grid" data-student-teams aria-live="polite"><div class="empty-state">Loading teams…</div></section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/portal-config.js?v=20260829-admin-access-2"></script>
+  <script src="/portal.js?v=20260829-admin-access-2"></script>
+  <script src="/main.js"></script>
+</body>
+</html>

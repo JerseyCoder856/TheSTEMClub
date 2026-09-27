@@ -14,6 +14,14 @@
   --brand-blue: #29abe2;
   --brand-green: #5cbf2a;
   --brand-yellow: #f5c518;
+  --poster-ink: #14263d;
+  --poster-paper: #f3faff;
+  --poster-blue: #29ABE2;
+  --poster-red: #FF3038;
+  --poster-green: #7ED957;
+  --poster-yellow: #FFD20A;
+  --poster-rule: 2px solid #dcebf4;
+  --poster-shadow: 0 3px 12px rgba(23,50,77,.08);
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 30px;

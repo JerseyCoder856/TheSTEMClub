@@ -23,6 +23,15 @@ The destructive reset section at the top of the migration is commented out. Leav
 
 The supplied Project URL and publishable browser key are already present in `portal-config.js`. This static site does not use Next.js, so `NEXT_PUBLIC_*` variables are not read at runtime. A publishable key is appropriate in browser code because all access is constrained by RLS. Never add the database password or `service_role` key to the repository.
 
+## Student portal migrations
+
+For an existing portal database, do not rerun `schema.sql`. Apply unapplied migrations in filename order. After `202608290006_workspace_workflows.sql`, apply:
+
+1. `supabase/migrations/202609270001_student_learning_progress.sql` adds the four pathway courses and lesson content, RPC-only idempotent completion/XP, and member certificates.
+2. `supabase/migrations/202609270002_student_projects_teams.sql` adds owner-scoped project drafts/private media, review and reward-bank approval, team creation/join/leave, and active-account RLS.
+
+Deploy the static files after the migrations succeed. The new `/member/explore`, `/member/build`, `/member/teams`, and `/member/club` routes require directory-index hosting or equivalent rewrites. Never make `project-media` public. Project approval awards 50 points from the reviewing administrator's point bank; insufficient bank balance leaves the approval transaction unchanged.
+
 ## Authentication dashboard
 
 In **Authentication → URL Configuration** set:
@@ -37,7 +46,7 @@ Enable Email/Password authentication. For production, require email confirmation
 
 ## Storage
 
-No Storage bucket is required for this release. Community images, badge icons, course covers, and learning resources currently accept validated HTTPS URLs. Before enabling uploads, create private/moderated buckets and add MIME type, size, ownership, and review policies; do not make a public youth-member upload bucket.
+The `project-media` bucket is private and limited by migration to supported image/video MIME types and 20 MB per file. Students upload only within their own UUID folder. Draft media is private; approved build media is signed for authenticated member reads. Do not make this bucket public.
 
 ## Email and video providers
 
@@ -61,7 +70,7 @@ No Storage bucket is required for this release. Community images, badge icons, c
 ## Intentionally incomplete external work
 
 - Direct bulk-email delivery is not enabled until an email provider and Edge Function are configured.
-- Managed file uploads are not enabled; this avoids unsafe public uploads until storage moderation rules are approved.
+- Direct student-to-student point transfers are intentionally not enabled; student recognition does not let the sender mint points.
 - Production SMTP, backups, custom-domain verification, and physical iOS/Android QR tests must be completed in the Supabase/deployment environments.
 # The STEM Club Passport — production setup
 

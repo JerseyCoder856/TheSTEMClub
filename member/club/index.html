@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>The Club — The STEM Club</title>
+  <link rel="stylesheet" href="/shared.css">
+  <link rel="stylesheet" href="/portal.css">
+  <link rel="stylesheet" href="/brand.css">
+</head>
+<body>
+  <nav class="navbar"><a href="/" class="logo"><img src="/m.png" alt="The STEM Club"></a><ul class="nav-links"><li><a href="/my-passport">Home</a></li><li><button type="button" data-logout class="btn-pill-outline-dark">Log Out</button></li></ul></nav>
+  <main class="portal-shell">
+    <p class="portal-message" data-portal-message role="status" aria-live="polite"></p>
+    <section class="portal-hero"><p class="portal-kicker">The Club</p><h1>Build together. Share ideas. Help each other.</h1><p>Meet collaborators, find a team, join an event, and celebrate the community.</p></section>
+    <section class="portal-grid student-club-links">
+      <a class="portal-card" href="/member/community"><span class="student-category">Collab</span><h2>Share and collaborate</h2><p>Post a project, ask a question, or recognize another student.</p><span data-club-approved-posts>Loading approved projects…</span><strong>Open Collabs →</strong></a>
+      <a class="portal-card" href="/member/teams"><span class="student-category">Teams</span><h2>Build with a team</h2><p>Find STEM teams or create a group around an idea.</p><span data-club-team-count>Loading teams…</span><strong>Explore Teams →</strong></a>
+      <a class="portal-card" href="/member/events"><span class="student-category">Events</span><h2>Upcoming experiences</h2><p>See workshops and register for a community build day.</p><span data-club-event-count>Loading events…</span><strong>View Events →</strong></a>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/portal-config.js?v=20260829-admin-access-2"></script>
+  <script src="/portal.js?v=20260829-admin-access-2"></script>
+  <script src="/main.js"></script>
+</body>
+</html>

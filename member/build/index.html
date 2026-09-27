@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Builds — The STEM Club</title>
+  <link rel="stylesheet" href="/shared.css">
+  <link rel="stylesheet" href="/portal.css">
+  <link rel="stylesheet" href="/brand.css">
+</head>
+<body>
+  <nav class="navbar"><a href="/" class="logo"><img src="/m.png" alt="The STEM Club"></a><ul class="nav-links"><li><a href="/my-passport">Home</a></li><li><button type="button" data-logout class="btn-pill-outline-dark">Log Out</button></li></ul></nav>
+  <main class="portal-shell">
+    <p class="portal-message" data-portal-message role="status" aria-live="polite"></p>
+    <section class="portal-hero"><p class="portal-kicker">Build</p><h1>Transform ideas into projects.</h1><p>Keep drafts private, then submit finished work for the Club showcase.</p><button type="button" class="btn-pill-yellow" data-create-project>+ Start a Build</button></section>
+    <div class="student-filter-row" role="group" aria-label="Filter projects" data-project-filters><button type="button" data-project-filter="all" aria-pressed="true">All builds</button><button type="button" data-project-filter="draft" aria-pressed="false">Drafts</button><button type="button" data-project-filter="pending" aria-pressed="false">In review</button><button type="button" data-project-filter="approved" aria-pressed="false">Published</button></div>
+    <section class="portal-grid" data-student-projects aria-live="polite"><div class="empty-state">Loading your builds…</div></section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/portal-config.js?v=20260829-admin-access-2"></script>
+  <script src="/portal.js?v=20260829-admin-access-2"></script>
+  <script src="/main.js"></script>
+</body>
+</html>

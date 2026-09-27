@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Explore STEM — The STEM Club</title>
+  <link rel="stylesheet" href="/shared.css">
+  <link rel="stylesheet" href="/portal.css">
+  <link rel="stylesheet" href="/brand.css">
+</head>
+<body>
+  <nav class="navbar"><a href="/" class="logo"><img src="/m.png" alt="The STEM Club"></a><ul class="nav-links"><li><a href="/my-passport">Home</a></li><li><button type="button" data-logout class="btn-pill-outline-dark">Log Out</button></li></ul></nav>
+  <main class="portal-shell">
+    <p class="portal-message" data-portal-message role="status" aria-live="polite"></p>
+    <section class="portal-hero"><p class="portal-kicker">Explore</p><h1>Discover what you can build.</h1><p>Search real courses, member projects, and STEM pathways.</p></section>
+    <div class="student-filter-row" role="group" aria-label="Filter by STEM pathway" data-explore-filters>
+      <button type="button" data-path-filter="All" aria-pressed="true">All</button><button type="button" data-path-filter="Electronics" aria-pressed="false">Electronics</button><button type="button" data-path-filter="Programming" aria-pressed="false">Programming</button><button type="button" data-path-filter="3D Design" aria-pressed="false">3D Design</button><button type="button" data-path-filter="Environmentals" aria-pressed="false">Environmentals</button>
+    </div>
+    <h2 class="portal-heading">Learning paths</h2>
+    <section class="portal-grid" data-explore-courses aria-live="polite"><div class="empty-state">Loading learning paths…</div></section>
+    <h2 class="portal-heading">Member projects</h2>
+    <section class="portal-grid" data-explore-projects aria-live="polite"><div class="empty-state">Loading approved projects…</div></section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/portal-config.js?v=20260829-admin-access-2"></script>
+  <script src="/portal.js?v=20260829-admin-access-2"></script>
+  <script src="/main.js"></script>
+</body>
+</html>

@@ -16,16 +16,24 @@ for (const helper of ['function loadNotificationCount()', 'function notification
 }
 assert.ok(portal.includes("client.rpc('member_notifications')"), 'notification UI must use the member-scoped notification RPC');
 assert.ok(portal.includes("client.rpc('mark_notifications_read',{notification_ids:unread})"), 'opening notifications must mark only returned unread rows as read');
+for (const helper of ['function mountStudentWorkspace()', 'async function loadStudentHome()', 'async function memberExplore()', 'async function memberBuild()', 'async function memberTeams()', 'async function memberClub()', 'async function profilePortfolio()', 'async function memberSettings()']) {
+  assert.ok(portal.includes(helper), `${helper} must be implemented`);
+}
+for (const rpc of ['complete_student_lesson','create_student_project','update_student_project','submit_student_project','delete_student_project','review_student_project','create_student_team','student_team_directory','join_student_team','leave_student_team']) {
+  assert.ok(portal.includes(`client.rpc('${rpc}'`), `${rpc} must be called by the portal`);
+}
+assert.ok(portal.includes("client.rpc('update_communication_preference'"), 'member communication preference must be persisted through its RPC');
 const tables = [
   'profiles','memberships','events','attendance','point_transactions','badges',
   'member_badges','audit_logs','event_registrations','courses','course_modules',
   'lessons','resources','lesson_progress','community_posts','post_reactions',
   'post_reports','recognitions','recognition_reactions','recognition_reports',
-  'outreach_campaigns'
+  'outreach_campaigns','member_certificates','student_projects','student_teams','student_team_members'
 ];
 for (const table of tables) {
-  assert.equal((schema.match(new RegExp(`create table public\\.${table} \\(`, 'g')) || []).length, 1, `${table} must be defined once`);
-  assert.ok(schema.includes(`alter table public.${table} enable row level security;`), `${table} must have RLS`);
+  const createPattern = new RegExp(`create table(?: if not exists)? public\\.${table} \\(`, 'g');
+  assert.equal((databaseSql.match(createPattern) || []).length, 1, `${table} must be defined once`);
+  assert.ok(databaseSql.includes(`alter table public.${table} enable row level security;`), `${table} must have RLS`);
 }
 const storageBuckets = ['project-media', 'badge-assets', 'profile-photos'];
 for (const table of [...portal.matchAll(/\.from\('([^']+)'\)/g)].map(m => m[1]).filter(name => !storageBuckets.includes(name))) {
@@ -86,6 +94,9 @@ assert.equal(new Set(functionNames).size, functionNames.length, 'portal.js conta
 
 const requiredAdminRoutes = ['admin', 'admin/badges', 'admin/learning', 'admin/events', 'admin/points'];
 for (const route of requiredAdminRoutes) assert.ok(fs.existsSync(`${route}/index.html`), `/${route} must be present in the static publish output`);
+for (const route of ['member/explore','member/build','member/teams','member/club']) assert.ok(fs.existsSync(`${route}/index.html`), `/${route} student portal route must be present in the static publish output`);
+const studentStyles = fs.readFileSync('student-portal.css','utf8');
+for (const color of ['#29ABE2','#FFD20A','#FF3038','#7ED957']) assert.ok(studentStyles.includes(color), `student portal must preserve pathway color ${color}`);
 assert.ok(migrations.includes("where role = 'admin' and account_status = 'active'"), 'point banks must be seeded from active database administrators');
 assert.match(migrations, /values\s*\(\s*'project-media',\s*'project-media',\s*false/, 'project-media must remain private');
 const workspaceMigration = fs.readFileSync('supabase/migrations/202608290005_feedback_notifications.sql', 'utf8');
@@ -98,6 +109,19 @@ assert.ok(workspaceMigration.includes("set search_path = ''"), 'security-definer
 assert.ok(portal.includes("localStorage.getItem('stem-language')"), 'workspace must persist the English/Spanish preference');
 assert.ok(portal.includes("client.rpc('submit_feedback'"), 'feedback must use the RLS-backed RPC');
 assert.ok(portal.includes("client.rpc('member_notifications'"), 'notifications must use the member-scoped RPC');
+const studentLearningMigration = fs.readFileSync('supabase/migrations/202609270001_student_learning_progress.sql', 'utf8');
+const studentProjectsMigration = fs.readFileSync('supabase/migrations/202609270002_student_projects_teams.sql', 'utf8');
+assert.ok(studentLearningMigration.includes("'stem-path-electronics'") && studentLearningMigration.includes("'stem-path-programming'") && studentLearningMigration.includes("'stem-path-3d-design'") && studentLearningMigration.includes("'stem-path-environmentals'"), 'all four designed learning paths must be seeded');
+assert.ok(studentLearningMigration.includes('revoke insert, update, delete on public.lesson_progress from authenticated'), 'students must not directly forge lesson completion rows');
+assert.ok(studentLearningMigration.includes("'lesson:'||member_key::text||':'||target_lesson::text"), 'lesson XP must use an idempotent source key');
+assert.ok(studentLearningMigration.includes('member_certificates'), 'path completion must persist certificates');
+for (const table of ['student_projects','student_teams','student_team_members']) {
+  assert.ok(studentProjectsMigration.includes(`alter table public.${table} enable row level security`), `${table} must enforce RLS`);
+}
+for (const rpc of ['create_student_project','update_student_project','submit_student_project','delete_student_project','review_student_project','create_student_team','student_team_directory','join_student_team','leave_student_team']) {
+  assert.ok(studentProjectsMigration.includes(`function public.${rpc}(`), `${rpc} migration is missing`);
+}
+assert.ok(studentProjectsMigration.includes('admin_award_points_from_bank'), 'student project awards must debit the administrator reward bank');
 const workflowsMigration = fs.readFileSync('supabase/migrations/202608290006_workspace_workflows.sql', 'utf8');
 for (const rpc of ['admin_review_recognition','admin_request_feedback','respond_to_feedback_request']) assert.ok(workflowsMigration.includes(`function public.${rpc}(`), `${rpc} workflow RPC is missing`);
 for (const activity of ['notify_attendance','notify_points','notify_badges','notify_feedback_request','notify_admin_feedback','notify_admin_recognition']) assert.ok(workflowsMigration.includes(`trigger ${activity}`), `${activity} notification trigger is missing`);
