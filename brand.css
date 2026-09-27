@@ -713,6 +713,16 @@ body { background-color: #fffdf5; color: var(--poster-ink); }
   border-radius: 6px;
   box-shadow: 3px 3px 0 var(--poster-ink);
 }
+.open-student-account {
+  display: inline-flex;
+  margin-top: 12px;
+  border: 2px solid var(--poster-ink);
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 var(--poster-ink);
+  font-weight: 900;
+  text-decoration: none;
+}
+.open-student-account:hover { transform: translateY(-2px); box-shadow: 5px 5px 0 var(--poster-ink); }
 
 /* Keep the full home banner visible below the shared 84px navigation. */
 .home-hero {

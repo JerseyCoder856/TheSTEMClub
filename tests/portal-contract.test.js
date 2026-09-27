@@ -5,6 +5,10 @@ const schema = fs.readFileSync('supabase/schema.sql', 'utf8');
 const migrations = fs.readdirSync('supabase/migrations').map(file => fs.readFileSync(`supabase/migrations/${file}`, 'utf8')).join('\n');
 const databaseSql = `${schema}\n${migrations}`;
 const portal = fs.readFileSync('portal.js', 'utf8');
+assert.ok(portal.includes("['/my-passport','My Passport']"), 'teacher workspace must link to the signed-in user\'s own Passport');
+const adminHome = fs.readFileSync('admin/index.html', 'utf8');
+assert.ok(adminHome.includes('class="btn-pill-yellow open-student-account" href="/my-passport?view=student">Open Student Account</a>'), 'admin overview must expose the student account preview');
+assert.ok(portal.includes("path==='/my-passport'&&new URLSearchParams(location.search).get('view')==='student'"), 'student preview must be scoped to the Passport route');
 const tables = [
   'profiles','memberships','events','attendance','point_transactions','badges',
   'member_badges','audit_logs','event_registrations','courses','course_modules',
