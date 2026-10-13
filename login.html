@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Open the sample student portal for The STEM Club.">
+  <title>Member Login | The STEM Club</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+  <header class="navbar login-navbar">
+    <a href="index.html" class="logo" aria-label="The STEM Club home">
+      <img src="/m.png" alt="The STEM Club">
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="index.html#about">About</a>
+      <a href="index.html#workshops">Workshops</a>
+      <a href="blog.html">Blog</a>
+      <a href="support.html">Get involved</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="login-main">
+    <section class="login-card" aria-labelledby="login-title">
+      <span class="login-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <p class="login-eyebrow">Student member portal</p>
+      <h1 id="login-title">Welcome back.</h1>
+      <p class="login-intro">Sign in to open your STEM Club dashboard.</p>
+      <form id="login-form">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="username" placeholder="you@example.com" required>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+        <button class="login-submit" type="submit">Open student dashboard</button>
+      </form>
+      <p class="login-status" role="note">Demo portal only. Sign-in is not connected to an account service; any valid email and password opens the sample dashboard. Your password is not saved.</p>
+      <a class="login-help" href="index.html#contact">Need help? Contact the club <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="login-footer">
+    <a href="index.html">The STEM Club</a>
+    <span>Learn. Create. Give Back.</span>
+  </footer>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      window.location.href = 'student-dashboard.html';
+    });
+  </script>
+</body>
+</html>
