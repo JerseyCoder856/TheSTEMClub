@@ -1,296 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The STEM Club — Home</title>
-  <link rel="stylesheet" href="shared.css"/>
-  <link rel="stylesheet" href="home.css"/>
-<link rel="stylesheet" href="/brand.css"></head>
-<body>
-
-
- <!-- NAVBAR -->
- <nav class="navbar">
-    <a href="index.html" class="logo" aria-label="The STEM Club home">
-      <img src="/m.png" alt="The STEM Club"/>
-    </a>
-
-
-
-    <ul class="nav-links" aria-label="Primary navigation">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li class="nav-dropdown">
-        <a href="index.html#workshops" aria-haspopup="true">Programs <span aria-hidden="true">⌄</span></a>
-        <div class="nav-dropdown-menu" aria-label="Programs">
-          <a href="#workshops">Mechanical</a>
-          <a href="#workshops">Electrical</a>
-          <a href="#workshops">Computer Science</a>
-          <a href="#workshops">Robotics Campaign</a>
-        </div>
-      </li>
-      <li><a href="index.html#about">About</a></li>
-      <li class="nav-dropdown">
-        <a href="support.html" aria-haspopup="true">Get Involved <span aria-hidden="true">⌄</span></a>
-        <div class="nav-dropdown-menu" aria-label="Get involved">
-          <a href="support.html#volunteer">Volunteer</a>
-          <a href="support.html">Partner with us</a>
-          <a href="support.html#shop">Shop to support</a>
-        </div>
-      </li>
-      <li><a href="checkout.html" class="btn-donate">Donate</a></li>
-      <li><a href="login" class="member-access-link" data-member-access>Member Login</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO — split red left / blue right -->
-  <section class="home-hero">
-    <div class="home-hero-left">
-      <p class="change-world-tag">Curiosity becomes capability here.</p>
-      <h1>Building bright futures through STEM.</h1>
-      <p class="hero-subtitle">The STEM Club creates welcoming workshops, mentorship, and community projects that help students discover science, technology, engineering, and math with confidence.</p>
-      <div class="hero-btns">
-        <a href="#workshops" class="btn-pill-yellow">Explore Workshops</a>
-        <a href="checkout.html" class="btn-pill-green">Donate</a>
-      </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The STEM Club serves young adults ages 18–27 in underserved communities across South Jersey and Philadelphia through STEM learning and community service.">
+  <title>The STEM Club | Learn. Create. Give Back.</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body class="home-refresh">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="electronics-icon" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v5m6-5v5M9 18v5m6-5v5M1 9h5m-5 6h5m12-6h5m-5 6h5"/><rect x="9" y="9" width="6" height="6"/></symbol>
+    <symbol id="code-icon" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/></symbol>
+    <symbol id="design-icon" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/></symbol>
+    <symbol id="environment-icon" viewBox="0 0 24 24"><path d="M20 3C9 2 3 6 3 13a7 7 0 0 0 7 7c7 0 11-6 10-17Z"/><path d="M3 22 16 9M8 17v-5m0 5h5"/></symbol>
+    <symbol id="community-icon" viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M2 21v-3a7 7 0 0 1 14 0v3M17 4a3 3 0 0 1 0 6m2 4a6 6 0 0 1 3 5v2"/></symbol>
+    <symbol id="robot-icon" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="14" rx="3"/><path d="M12 3v4M1 12v5m22-5v5M9 17h6"/><circle cx="12" cy="2" r="1"/><circle cx="8" cy="12" r="1"/><circle cx="16" cy="12" r="1"/></symbol>
+    <symbol id="heart-icon" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="user-icon" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></symbol>
+  </svg>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container navigation">
+      <a class="logo" href="#home" aria-label="The STEM Club home"><span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>The STEM Club<small>Learn. Create. Give Back.</small></span></a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a><a href="#programs">Programs</a><a href="blog.html">Blogs</a><a href="#events">Events</a><a href="#contact">Contact</a>
+        <a class="login-link" href="login.html"><svg class="icon" aria-hidden="true"><use href="#user-icon"/></svg>Log In</a>
+        <a class="button button-red nav-donate" href="checkout.html"><svg class="icon" aria-hidden="true"><use href="#heart-icon"/></svg>Donate</a>
+      </nav>
     </div>
-    <div class="home-hero-right">
-      <div class="hero-video-thumb">
-        <img src="https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=1400&q=88" alt="Hands-on STEM workshop equipment"/>
-        <p class="hero-photo-label"><strong>Explore. Build. Belong.</strong><span>Practical STEM experiences with room to grow.</span></p>
+  </header>
+  <main id="main">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero-layout">
+        <div class="hero-copy"><p class="eyebrow">South Jersey &amp; Philadelphia Area</p><h1 id="hero-title">Build your skills.<br><span>Shape what’s next.</span></h1><p class="hero-description">Explore STEM, create something new, and give back. The STEM Club serves young adults ages 18–27 in underserved communities through hands-on programs and community service.</p><div class="actions"><a class="button button-yellow" href="#programs">Explore Our Programs</a><a class="button button-outline" href="#contact">Get Involved</a></div><p class="hero-note">Electronics · Coding · 3D Design · Environment · Service · Robotics</p></div>
+        <figure class="hero-photo"><img src="https://i.postimg.cc/3JKTxCJ9/Untitled-design-%283%29.png" alt="A group exploring electronics and a robotic arm together" fetchpriority="high"><figcaption>Learn together. Build together.</figcaption></figure>
       </div>
-    </div>
-  </section>
-
-  <!-- MISSION / VISION / VALUES cards -->
-  <section class="mvv-section">
-    <div class="section-intro section-intro--center">
-      <p class="section-kicker">Our foundation</p>
-      <h2>Big ideas need a place to begin.</h2>
-    </div>
-    <div class="mvv-grid">
-      <!-- Mission — blue -->
-      <div class="mvv-card mvv-blue">
-        <div class="mvv-icon" aria-hidden="true">
-          <svg viewBox="0 0 96 96" role="img" focusable="false"><circle cx="48" cy="48" r="32" fill="#d9f1ff"/><circle cx="48" cy="48" r="22" fill="#29ABE2"/><circle cx="48" cy="48" r="10" fill="#fff"/><path d="M62 26 78 10l2 14 14 2-16 16-14-2-2-14Z" fill="#0d4f80"/><path d="m48 48 22-22" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Mission</h3>
-        <p>Make hands-on STEM learning accessible, encouraging, and practical for students who are ready to explore new possibilities.</p>
-      </div>
-      <!-- Vision — green -->
-      <div class="mvv-card mvv-green">
-        <div class="mvv-icon" aria-hidden="true">
-          <svg viewBox="0 0 96 96" role="img" focusable="false"><path d="M16 76c5-17 19-27 32-27s27 10 32 27" fill="#dff6d7"/><circle cx="48" cy="31" r="17" fill="#5CBF2A"/><path d="M18 61c4-10 12-16 22-18M78 61c-4-10-12-16-22-18" stroke="#0d4f80" stroke-width="7" stroke-linecap="round"/><path d="M33 77c3-10 9-16 15-16s12 6 15 16" fill="#29ABE2"/></svg>
-        </div>
-        <h3>Vision</h3>
-        <p>A community where every learner can see themselves as a builder, problem-solver, creator, and future STEM leader.</p>
-      </div>
-      <!-- Values — yellow -->
-      <div class="mvv-card mvv-yellow">
-        <div class="mvv-icon" aria-hidden="true">
-          <svg viewBox="0 0 96 96" role="img" focusable="false"><path d="M24 20h48v36c0 17-12 28-24 34-12-6-24-17-24-34V20Z" fill="#fff4bf"/><path d="M35 49 45 59 64 36" fill="none" stroke="#0d4f80" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="21" r="9" fill="#29ABE2"/><circle cx="72" cy="21" r="9" fill="#5CBF2A"/><path d="M24 31v21M72 31v21" stroke="#F5C518" stroke-width="8" stroke-linecap="round"/></svg>
-        </div>
-        <h3>Values & a clear path into STEM</h3>
-        <p>Curiosity, service, teamwork, creativity, and belonging guide four featured pathways—mechanical, electrical, computer science, and robotics—and three ways to help: volunteer, partner, or support a workshop.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT US -->
-  <section class="about-section" id="about">
-    <div class="about-inner">
-      <div class="about-left">
-        <p class="about-eyebrow section-kicker section-kicker-blue">About Us</p>
-        <h2 class="about-title">A student-centered nonprofit for hands-on <span class="stem-colored">STEM</span> discovery</h2>
-        <div class="about-photos">
-          <img src="https://i.imgur.com/lbb46Tb.jpeg" alt="STEM 1" class="about-photo border-red"/>
-          <img src="https://i.imgur.com/FaX9wHi.jpeg" alt="Students collaborating during a STEM activity" class="about-photo border-green"/>
-          <img src="https://i.imgur.com/XC62kBT.jpeg" alt="STEM 3" class="about-photo border-blue"/>
-          <img src="https://i.imgur.com/EGZzQyi.jpeg" alt="STEM 4" class="about-photo border-yellow"/>
+    </section>
+    <section class="container highlights" aria-label="Who we serve">
+      <article><span class="highlight-number yellow-text">18–27</span><h2>Young Adults</h2><p>A community for exploring interests and developing STEM skills.</p></article>
+      <article><svg class="icon highlight-icon blue-text" aria-hidden="true"><use href="#community-icon"/></svg><h2>Local Connections</h2><p>Serving underserved communities across South Jersey and the Philly area.</p></article>
+      <article><svg class="icon highlight-icon red-text" aria-hidden="true"><use href="#heart-icon"/></svg><h2>Learning With Purpose</h2><p>Connecting STEM exploration with opportunities to give back.</p></article>
+    </section>
+    <section class="section" id="about">
+      <div class="container split-layout"><figure class="feature-photo"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="A close-up of an electronic circuit board" loading="lazy"><figcaption>Discover how ideas become working projects.</figcaption></figure><div><p class="eyebrow">About The STEM Club</p><h2>A place to learn,<br>create, and connect.</h2><p class="lead">Bringing STEM learning and community service together for young adults.</p><p>The STEM Club serves people ages 18–27 in underserved communities across South Jersey and the Philadelphia area. Our programs explore electronics, coding, 3D design, environmental topics, community service, and robotics.</p><p>Whether you’re exploring a new interest or looking for ways to contribute, connect with us to learn about participation and current opportunities.</p><a class="text-link" href="#contact">Connect with the club →</a></div></div>
+    </section>
+    <section class="section section-soft" id="programs">
+      <div class="container"><div class="section-heading"><p class="eyebrow">Our Programs</p><h2>Find your next spark.</h2><p>Six ways to explore your interests, practice new skills, and connect with your community.</p></div>
+        <div class="program-grid">
+          <article class="program-card"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Electronic components on a circuit board" loading="lazy"><div class="card-body"><span class="icon-bubble yellow"><svg class="icon" aria-hidden="true"><use href="#electronics-icon"/></svg></span><h3>Electronics</h3><p>Explore circuits, components, and the systems behind everyday technology.</p><a class="text-link" href="#contact">Ask about electronics →</a></div></article>
+          <article class="program-card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Programming code displayed on a screen" loading="lazy"><div class="card-body"><span class="icon-bubble blue"><svg class="icon" aria-hidden="true"><use href="#code-icon"/></svg></span><h3>Coding</h3><p>Practice turning ideas into instructions and explore creative problem-solving through code.</p><a class="text-link" href="#contact">Ask about coding →</a></div></article>
+          <article class="program-card"><div class="program-illustration design-art"><svg class="icon" aria-hidden="true"><use href="#design-icon"/></svg><span>Imagine in 3D</span></div><div class="card-body"><span class="icon-bubble red"><svg class="icon" aria-hidden="true"><use href="#design-icon"/></svg></span><h3>3D Design</h3><p>Explore shape, space, and digital modeling as you develop ideas in three dimensions.</p><a class="text-link" href="#contact">Ask about 3D design →</a></div></article>
+          <article class="program-card"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Sunlight passing through a green forest" loading="lazy"><div class="card-body"><span class="icon-bubble yellow"><svg class="icon" aria-hidden="true"><use href="#environment-icon"/></svg></span><h3>Environmental Learning</h3><p>Explore our relationship with the environment and consider ways to care for the world around us.</p><a class="text-link" href="#contact">Ask about environmental programs →</a></div></article>
+          <article class="program-card"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="People collaborating around a table" loading="lazy"><div class="card-body"><span class="icon-bubble blue"><svg class="icon" aria-hidden="true"><use href="#community-icon"/></svg></span><h3>Community Service</h3><p>Connect with others and contribute your time and energy through community service.</p><a class="text-link" href="#contact">Ask about service →</a></div></article>
+          <article class="program-card"><img src="https://i.postimg.cc/3JKTxCJ9/Untitled-design-%283%29.png" alt="A group examining a robotic arm and electronics" loading="lazy"><div class="card-body"><span class="icon-bubble red"><svg class="icon" aria-hidden="true"><use href="#robot-icon"/></svg></span><h3>Robotics</h3><p>Bring electronics, programming, and design together to explore how robots work.</p><a class="text-link" href="#contact">Ask about robotics →</a></div></article>
         </div>
       </div>
-      <div class="about-right">
-        <p class="about-who-title">Who We Are</p>
-        <p class="about-body">Our programs introduce learners to mechanical design, electronics, coding, robotics, and community problem-solving in a way that feels welcoming instead of intimidating.</p>
-        <p class="about-body">With volunteers, families, sponsors, and educators, we provide tools and experiences that help young people build confidence and imagine future careers.</p>
-        <div class="about-checks">
-          <span><span class="feature-icon" aria-hidden="true">⚙️</span> Hands-on learning</span>
-          <span class="sep">|</span>
-          <span><span class="feature-icon" aria-hidden="true">❤️</span> Community impact</span>
-        </div>
-        <a href="checkout.html" class="btn-donate-red">DONATE</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORKSHOPS -->
-  <section class="workshops-section" id="workshops">
-    <div class="workshops-title-deco">
-      <div class="dash yellow-dash"></div>
-      <div><p class="section-kicker">Choose a pathway</p><h2>Workshops</h2></div>
-      <div class="dash yellow-dash"></div>
-    </div>
-    <div class="workshop-cards">
-      <article class="workshop-card ws-red">
-        <div class="ws-img">
-          <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/140128294/original/d7baaf14beb25f58dd892dce3475852c69a9df66/do-2d-drawing-and-3d-modeling-using-autocad-and-solidworks.jpg" alt="Robotics and mechanical engineering workshop"/>
-        </div>
-        <div class="ws-body">
-          <h3>Mechanical</h3>
-          <p>Example lesson: students could design a simple assistive device, sketch the idea, model it in CAD, test materials, and learn how gears, levers, measurements, and 3D printing turn an idea into a working prototype.</p>
-
-        </div>
-      </article>
-      <article class="workshop-card ws-yellow">
-        <div class="ws-img">
-          <img src="https://i.imgur.com/fLX1GB9.jpeg" alt="Electrical workshop"/>
-        </div>
-        <div class="ws-body">
-          <h3>Electrical</h3>
-          <p>Example lesson: students could build a light-up safety badge or mini alarm while learning voltage, resistance, breadboards, sensors, LEDs, and how engineers troubleshoot circuits safely.</p>
-
-        </div>
-      </article>
-      <article class="workshop-card ws-blue">
-        <div class="ws-img">
-          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1000&q=80" alt="Computer workshop"/>
-        </div>
-        <div class="ws-body">
-          <h3>Computer</h3>
-          <p>Example lesson: students could code an interactive game or robot controller, learning variables, loops, logic, debugging, user experience, and how software can solve real community problems.</p>
-
-        </div>
-      </article>
-      <article class="workshop-card ws-green">
-        <div class="ws-img">
-          <img src="https://i.imgur.com/AgFaYHl.png" alt="Student robotics campaign"/>
-        </div>
-        <div class="ws-body">
-          <h3>Our Campaign</h3>
-          <p>Help us bring robotics kits, tools, and mentor-led build sessions to more students through our ongoing STEM access campaign.</p>
-          <div class="campaign-progress" aria-label="Campaign progress toward $5,000 goal">
-            <div class="campaign-progress-label"><span>$750 donated</span><span>$5,000 goal</span></div>
-            <div class="campaign-bar"><span style="width: 20%"></span></div>
-          </div>
-          <div class="campaign-amounts" data-donation-amounts>
-            <button type="button" data-amount="25">$25</button>
-            <button type="button" data-amount="50">$50</button>
-            <button type="button" data-amount="75">$75</button>
-            <button type="button" data-amount="100">$100</button>
-          </div>
-          <input class="campaign-custom" type="number" min="1" step="1" placeholder="Custom..." data-donation-custom />
-          <a href="#" target="_blank" rel="noopener" class="ws-btn paypal-donate-btn" data-paypal-donate>Donate</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- SUPPORT OUR WORK BANNER -->
-  <section class="support-work-banner">
-    <div class="heart-icon">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23E8312A' d='M50 86S12 62 12 33c0-13 10-23 23-23 8 0 13 4 15 9 2-5 7-9 15-9 13 0 23 10 23 23 0 29-38 53-38 53z'/%3E%3C/svg%3E" alt="Red heart"/>
-    </div>
-    <div class="sw-text">
-      <h2>Support Our Work</h2>
-      <p>Your support funds workshop materials, robotics equipment, student projects, and outreach events that make STEM feel possible for more families.</p>
-    </div>
-    <div class="sw-btns">
-      <a href="support.html#shop" class="btn-green-pill">Our Shop -></a>
-      <a href="checkout.html" class="btn-red-pill">Support Our Campaign</a>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact-section" id="contact">
-    <div class="section-title-deco">
-      <div class="dash"></div>
-      <h2>Contact</h2>
-      <div class="dash"></div>
-    </div>
-    <div class="contact-layout">
-      <form class="contact-form-card" data-mailto-form data-recipient="jeremiah@thestemclub.net">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="contact-first">First Name *</label>
-          <input id="contact-first" name="firstName" type="text" autocomplete="given-name" required/>
-        </div>
-        <div class="form-group">
-          <label for="contact-last">Last Name *</label>
-          <input id="contact-last" name="lastName" type="text" autocomplete="family-name" required/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="contact-email">Email *</label>
-        <input id="contact-email" name="email" type="email" autocomplete="email" required/>
-      </div>
-      <div class="form-group">
-        <label for="contact-message">Message *</label>
-        <textarea id="contact-message" name="message" required></textarea>
-      </div>
-        <button type="submit" class="btn-submit">Submit</button>
-      </form>
-      <aside class="contact-intro"><p class="section-kicker">Start a conversation</p><h3>Let’s build something useful together.</h3><p>Ask about workshops, volunteering, partnerships, or bringing hands-on STEM learning to your community.</p><ul><li>Workshop questions</li><li>Volunteer and mentor interest</li><li>Community partnerships</li></ul></aside>
-    </div>
-  </section>
-
-<!-- FOOTER -->
-<!-- FOOTER -->
-<footer class="site-footer">
-
-  <div class="footer-socials">
-
-    <!-- LOGO BUTTON -->
-    <a href="index.html" class="social-circle logo-btn" title="The STEM Club Home">
-      STEM
-    </a>
-
-    <!-- FACEBOOK -->
-    <a href="https://www.facebook.com/people/Thestemclub-Nj/61586101222403/"
-       target="_blank"
-       class="social-circle"
-       title="Facebook">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/facebook.svg" alt="Facebook">
-    </a>
-
-    <!-- INSTAGRAM -->
-    <a href="https://www.instagram.com/thestemclubnj/"
-       target="_blank"
-       class="social-circle"
-       title="Instagram">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg" alt="Instagram">
-    </a>
-
-    <!-- LINKEDIN -->
-    <a href="https://www.linkedin.com/company/the-stem-club-nj/"
-       target="_blank"
-       class="social-circle"
-       title="LinkedIn">
-      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn">
-    </a>
-
-  </div>
-
-  <p class="footer-legal">
-    <a href="/privacy.html">Privacy Policy</a> &nbsp;
-    <a href="/legal.html">Legal</a> &nbsp;
-    © 2025 The STEM Club. All rights reserved.
-  </p>
-
-</footer>
-
-<aside class="cart-drawer" data-cart-drawer aria-live="polite">
-  <div class="cart-drawer-panel">
-    <button type="button" class="cart-close" data-cart-close aria-label="Close cart">×</button>
-    <h3>Your Cart</h3>
-    <div class="cart-items" data-cart-items><p class="empty-cart">No items yet.</p></div>
-    <div class="cart-total"><span>Total</span><strong data-cart-total>$0</strong></div>
-    <a href="checkout.html" class="checkout-btn">Checkout</a>
-  </div>
-</aside>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/portal-config.js?v=20260829-admin-access-2"></script>
-<script src="/portal.js?v=20260829-admin-access-2"></script>
-<script src="main.js"></script>
+    </section>
+    <section class="section" id="blogs"><div class="container split-layout"><div><p class="eyebrow">The Club Journal</p><h2>Share the process.<br>Celebrate discovery.</h2><p class="lead">A space for project stories, STEM ideas, and community updates.</p></div><div class="notice-card"><h3>Stories, ideas, and community updates.</h3><p>Read about STEM education, careers, and the projects that bring learning into our communities.</p><a class="text-link" href="blog.html">Visit the club journal →</a></div></div></section>
+    <section class="section section-soft" id="events"><div class="container split-layout"><div><p class="eyebrow">Events &amp; Opportunities</p><h2>Connect beyond<br>the screen.</h2><p>Interested in a program, community service opportunity, or collaboration in South Jersey or the Philadelphia area? Contact us for current opportunities.</p><p>Confirmed event dates, locations, and registration details will be posted here.</p><a class="button button-blue" href="#contact">Ask About Events</a></div><figure class="feature-photo"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" alt="A group collaborating and exchanging ideas" loading="lazy"><figcaption>Build connections. Exchange ideas.</figcaption></figure></div></section>
+    <section class="section donation-section" id="donate"><div class="container donation-content"><svg class="icon donation-icon" aria-hidden="true"><use href="#heart-icon"/></svg><p class="eyebrow">Support The STEM Club</p><h2>Help more ideas take shape.</h2><p>Support STEM learning and community engagement for young adults in underserved communities across South Jersey and the Philadelphia area.</p><p>Contact us to discuss financial support, materials, equipment, or other ways to contribute.</p><a class="button button-yellow" href="checkout.html">Donate to the club</a></div></section>
+    <section class="section" id="login"><div class="container member-panel"><span class="icon-bubble blue"><svg class="icon" aria-hidden="true"><use href="#user-icon"/></svg></span><div><p class="eyebrow">Member Access</p><h2>Stay connected.</h2><p>Open the student portal to explore sample learning progress and club activities.</p></div><a class="button button-blue" href="login.html">Student Log In</a></div></section>
+    <section class="section section-soft" id="contact"><div class="container contact-content"><p class="eyebrow">Get Involved</p><h2>Let’s start a conversation.</h2><p>Want to join a program, volunteer, partner with us, or support the club?</p><div class="contact-layout"><form class="contact-form-card" action="https://formspree.io/f/mnjjyyao" method="POST"><div class="form-row"><div class="form-group"><label for="first-name">First Name *</label><input id="first-name" type="text" name="first_name" placeholder="Jane" required></div><div class="form-group"><label for="last-name">Last Name *</label><input id="last-name" type="text" name="last_name" placeholder="Smith" required></div></div><div class="form-group"><label for="contact-email">Email *</label><input id="contact-email" type="email" name="email" placeholder="jane@example.com" required></div><div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us about your interest..."></textarea></div><button class="btn-submit" type="submit">Submit</button></form><div class="contact-map"><iframe title="Map of South Jersey" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-75.60%2C38.85%2C-73.90%2C40.35&amp;layer=mapnik&amp;marker=39.70%2C-74.80"></iframe></div></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="footer-content"><div><a class="footer-logo" href="#home">The STEM Club</a><p>Learn. Create. Give Back.</p><p>South Jersey &amp; Philadelphia Area · Ages 18–27</p></div><nav aria-label="Footer navigation"><a href="#about">About</a><a href="#programs">Programs</a><a href="blog.html">Blogs</a><a href="support.html">Support Us</a><a href="#contact">Contact</a></nav></div><div class="palette-bar" aria-hidden="true"><i></i><i></i><i></i></div></footer>
+  <script src="main.js"></script>
 </body>
 </html>
