@@ -61,8 +61,8 @@ body.home-refresh .logo-mark i:nth-child(3) { background: #e72449; }
 body.home-refresh .navigation nav { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 18px; }
 body.home-refresh .navigation nav > a:not(.button) { font-size: 13px; font-weight: 800; }
 body.home-refresh .navigation nav > a:not(.button):hover { color: #075d82; text-decoration: underline; text-underline-offset: 5px; }
-body.home-refresh .navigation .login-link { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 7px; color: #fff; background: #743d68; font-size: 14px; font-weight: 800; }
-body.home-refresh .navigation .login-link:hover { color: #fff; background: #633258; text-decoration: none; }
+body.home-refresh .navigation .login-link { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border: 2px solid #743d68; border-radius: 7px; color: #132b3a; background: #fff; font-size: 14px; font-weight: 800; }
+body.home-refresh .navigation .login-link:hover { color: #132b3a; border-color: #633258; background: #fff; text-decoration: none; }
 body.home-refresh .navigation .login-link .icon { width: 18px; height: 18px; flex: 0 0 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 body.home-refresh .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 19px; border: 2px solid transparent; border-radius: 7px; font-size: 14px; font-weight: 800; text-align: center; transition: transform .18s ease, box-shadow .18s ease; }
 body.home-refresh .button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.12); }
