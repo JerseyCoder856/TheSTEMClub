@@ -37,9 +37,9 @@ export async function POST(request: NextRequest) {
   if (!sameOrigin(request)) return json({ error: "forbidden" }, 403);
   const supabase = await createSupabaseServerClient();
   if (!supabase) return json({ error: "not_configured" }, 503);
-  let body: { access_token?: unknown; refresh_token?: unknown };
+  let body: { access_token?: unknown; refresh_token?: unknown } | null;
   try { body = await request.json(); } catch { return json({ error: "invalid_request" }, 400); }
-  if (typeof body.access_token !== "string" || typeof body.refresh_token !== "string" || body.access_token.length > 10000 || body.refresh_token.length > 10000) {
+  if (!body || typeof body.access_token !== "string" || typeof body.refresh_token !== "string" || !body.access_token || !body.refresh_token || body.access_token.length > 10000 || body.refresh_token.length > 10000) {
     return json({ error: "invalid_request" }, 400);
   }
   const { data, error } = await supabase.auth.setSession({ access_token: body.access_token, refresh_token: body.refresh_token });

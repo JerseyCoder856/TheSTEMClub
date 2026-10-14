@@ -11,7 +11,6 @@ export interface LearningLesson {
   project_instructions: string | null;
   video_url: string | null;
   position: number;
-  xp_reward: number;
   published: boolean;
   resources: LearningResource[];
 }
@@ -28,14 +27,7 @@ export interface LearningCourse {
   id: string;
   title: string;
   summary: string;
-  pathway: string;
+  access_level: "all_members" | "active_members";
   position: number;
   course_modules: LearningModule[];
-}
-
-export interface MemberCertificate {
-  id: string;
-  course_id: string;
-  certificate_code: string;
-  awarded_at: string;
 }

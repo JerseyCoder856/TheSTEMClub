@@ -39,6 +39,7 @@ export async function createCourse(formData: FormData) {
   const { error } = await supabase.from("courses").insert({ title, slug, summary, access_level: accessLevel, published: formData.get("published") === "on", created_by: user.id });
   if (error) redirect("/admin/learning?status=error");
   revalidatePath("/admin/learning");
+  revalidatePath("/member/education");
   redirect("/admin/learning?status=saved");
 }
 
@@ -56,6 +57,7 @@ export async function createModule(formData: FormData) {
   const { error } = await supabase.from("course_modules").insert({ course_id: courseId, title, position, published: formData.get("published") === "on" });
   if (error) redirect("/admin/learning?status=error");
   revalidatePath("/admin/learning");
+  revalidatePath("/member/education");
   redirect("/admin/learning?status=saved");
 }
 
@@ -79,15 +81,14 @@ export async function createLesson(formData: FormData) {
       videoUrl = parsedUrl.toString();
     } catch { redirect("/admin/learning?status=invalid"); }
   }
-  const xpReward = Number(formData.get("xp_reward") ?? 25);
-  if (!Number.isInteger(xpReward) || xpReward < 1 || xpReward > 100) redirect("/admin/learning?status=invalid");
   const { error } = await supabase.from("lessons").insert({
     module_id: moduleId, title, content: textValue(formData, "content"),
     project_instructions: textValue(formData, "project_instructions"), video_url: videoUrl,
-    position, xp_reward: xpReward, published: formData.get("published") === "on",
+    position, published: formData.get("published") === "on",
   });
   if (error) redirect("/admin/learning?status=error");
   revalidatePath("/admin/learning");
+  revalidatePath("/member/education");
   redirect("/admin/learning?status=saved");
 }
 
@@ -117,3 +118,18 @@ export async function toggleCourse(formData: FormData) {
   revalidatePath("/member/education");
   redirect("/admin/learning?status=saved");
 }
+
+async function setPublished(formData: FormData, table: "course_modules" | "lessons") {
+  const { supabase } = await requireAdmin();
+  const id = textValue(formData, "id");
+  const published = textValue(formData, "published");
+  if (!uuidPattern.test(id) || !["true", "false"].includes(published)) redirect("/admin/learning?status=invalid");
+  const { error } = await supabase.from(table).update({ published: published === "true" }).eq("id", id);
+  if (error) redirect("/admin/learning?status=error");
+  revalidatePath("/admin/learning");
+  revalidatePath("/member/education");
+  redirect("/admin/learning?status=saved");
+}
+
+export async function publishModule(formData: FormData) { await setPublished(formData, "course_modules"); }
+export async function publishLesson(formData: FormData) { await setPublished(formData, "lessons"); }

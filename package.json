@@ -2,7 +2,9 @@
   "name": "the-stem-club",
   "version": "1.0.0",
   "private": true,
-  "engines": { "node": ">=20.19.0" },
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "predev": "node scripts/sync-legacy-public.mjs",
     "dev": "next dev",
@@ -11,7 +13,7 @@
     "start": "next start",
     "lint": "eslint app lib types proxy.ts next.config.ts",
     "typecheck": "tsc --noEmit",
-    "test": "node tests/public-ui-contract.test.js && node tests/portal-contract.test.js && node tests/workspace-workflows.test.js && node tests/next-migration-contract.test.mjs"
+    "test": "node tests/public-ui-contract.test.js && node tests/portal-contract.test.js && node tests/workspace-workflows.test.js && node tests/next-migration-contract.test.mjs && node tests/next-behavior.test.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",

@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { safeNextPath } from "@/lib/auth/redirect";
 
 type BrowserClient = NonNullable<ReturnType<typeof createSupabaseBrowserClient>>;
 
@@ -15,10 +16,6 @@ async function syncServerSession(session: Session) {
     });
     return response.ok;
   } catch { return false; }
-}
-
-function safeNextPath(path: string) {
-  return path.startsWith("/") && !path.startsWith("//") ? path : "";
 }
 
 async function activeRole(client: BrowserClient, session: Session) {
