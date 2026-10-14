@@ -21,7 +21,7 @@ The destructive reset section at the top of the migration is commented out. Leav
 
 ## Frontend connection
 
-The supplied Project URL and publishable browser key are already present in `portal-config.js`. This static site does not use Next.js, so `NEXT_PUBLIC_*` variables are not read at runtime. A publishable key is appropriate in browser code because all access is constrained by RLS. Never add the database password or `service_role` key to the repository.
+The supplied Project URL and publishable browser key are already present in `portal-config.js`. This release uses Next.js alongside the legacy pages. Follow `NEXTJS_MIGRATION.md` and configure both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` before building; the asset sync generates the legacy public config from the same variables. A publishable key is appropriate in browser code because all access is constrained by RLS. Never add the database password or `service_role` key to the repository.
 
 ## Authentication dashboard
 
