@@ -11,12 +11,21 @@ function json(body: object, status = 200) {
 function sameOrigin(request: NextRequest) {
   const origin = request.headers.get("origin");
   if (!origin) return true;
-  try { return new URL(origin).origin === request.nextUrl.origin; } catch { return false; }
+  try {
+    // Next.js may construct nextUrl with its internal listening hostname.
+    // The HTTP Host is the public host the browser actually requested.
+    const expected = new URL(request.nextUrl.origin);
+    expected.host = request.headers.get("host") ?? expected.host;
+    const protocol = request.headers.get("x-forwarded-proto");
+    if (protocol === "https" || protocol === "http") expected.protocol = `${protocol}:`;
+    return new URL(origin).origin === expected.origin;
+  } catch { return false; }
 }
 
 async function activeProfile(supabase: NonNullable<Awaited<ReturnType<typeof createSupabaseServerClient>>>, userId: string) {
   const { data, error } = await supabase.from("profiles").select("account_status").eq("id", userId).maybeSingle();
-  return !error && data?.account_status === "active";
+  if (error) return null;
+  return data?.account_status === "active";
 }
 
 export async function GET() {
@@ -24,7 +33,9 @@ export async function GET() {
   if (!supabase) return json({ error: "not_configured" }, 503);
   const { data: { user }, error } = await supabase.auth.getUser();
   if (error || !user) return json({ error: "unauthorized" }, 401);
-  if (!(await activeProfile(supabase, user.id))) {
+  const active = await activeProfile(supabase, user.id);
+  if (active === null) return json({ error: "profile_unavailable" }, 503);
+  if (!active) {
     await supabase.auth.signOut();
     return json({ error: "inactive" }, 403);
   }
@@ -42,9 +53,18 @@ export async function POST(request: NextRequest) {
   if (!body || typeof body.access_token !== "string" || typeof body.refresh_token !== "string" || !body.access_token || !body.refresh_token || body.access_token.length > 10000 || body.refresh_token.length > 10000) {
     return json({ error: "invalid_request" }, 400);
   }
-  const { data, error } = await supabase.auth.setSession({ access_token: body.access_token, refresh_token: body.refresh_token });
+  let result;
+  try {
+    result = await supabase.auth.setSession({ access_token: body.access_token, refresh_token: body.refresh_token });
+  } catch {
+    // The SDK throws for malformed JWTs rather than returning an AuthError.
+    return json({ error: "unauthorized" }, 401);
+  }
+  const { data, error } = result;
   if (error || !data.user) return json({ error: "unauthorized" }, 401);
-  if (!(await activeProfile(supabase, data.user.id))) {
+  const active = await activeProfile(supabase, data.user.id);
+  if (active === null) return json({ error: "profile_unavailable" }, 503);
+  if (!active) {
     await supabase.auth.signOut();
     return json({ error: "inactive" }, 403);
   }

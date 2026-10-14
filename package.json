@@ -11,6 +11,7 @@
     "prebuild": "node scripts/sync-legacy-public.mjs",
     "build": "next build",
     "start": "next start",
+    "test:integration": "node tests/session-integration.test.mjs",
     "lint": "eslint app lib types proxy.ts next.config.ts",
     "typecheck": "tsc --noEmit",
     "test": "node tests/public-ui-contract.test.js && node tests/portal-contract.test.js && node tests/workspace-workflows.test.js && node tests/next-migration-contract.test.mjs && node tests/next-behavior.test.mjs"

@@ -47,6 +47,13 @@ Run `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, and
 columns against the real schema, publication ordering, completion authorization,
 duplicate handling, and malformed session payloads.
 
+`npm run test:integration` builds and starts a real production Next.js server
+against a local Supabase HTTP fixture. It verifies session cookies, token refresh,
+member/admin route access, suspension, database outages, cross-origin rejection,
+logout, and legacy routes with the real Supabase SDK. It makes no production
+database changes and requires no real accounts. Run `npm run build` afterward
+before serving the app normally, because this test builds with fixture variables.
+
 Before production rollout, verify with staging member and administrator accounts:
 
 - Sign in, move between Next.js learning and legacy Passport/Workspace pages,
